@@ -1,4 +1,6 @@
 import 'package:e_commerce/providers/theme_provider.dart';
+import 'package:e_commerce/widgets/subtitle_text.dart';
+import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,12 +14,9 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Hello World',
-            style: TextStyle(
-              fontSize: 50,
-              fontWeight: FontWeight.bold,
-            ),
+          const SubtitleText(
+            label: 'Hi Again!',
+            fontSize: 60,
           ),
           const Card(
             child: Padding(
@@ -28,6 +27,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+          TitleText(label: 'label ' * 10),
           SwitchListTile(
             title:
                 Text(themeProvider.getIsDarkTheme ? 'Dark Mode' : 'Light Mode'),
