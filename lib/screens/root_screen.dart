@@ -14,7 +14,7 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   late PageController controller;
-  int currentScreen = 0;
+  int currentScreen = 3;
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
@@ -45,8 +45,8 @@ class _RootScreenState extends State<RootScreen> {
         onDestinationSelected: (index) {
           setState(() {
             currentScreen = index;
+            controller.jumpToPage(currentScreen);
           });
-          controller.jumpToPage(currentScreen);
         },
         destinations: const [
           NavigationDestination(
