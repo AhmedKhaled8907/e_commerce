@@ -14,7 +14,7 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   late PageController controller;
-  int currentScreen = 3;
+  int currentScreen = 2;
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
@@ -41,6 +41,7 @@ class _RootScreenState extends State<RootScreen> {
       bottomNavigationBar: NavigationBar(
         elevation: 1,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        indicatorColor: Colors.blueAccent.shade700,
         selectedIndex: currentScreen,
         onDestinationSelected: (index) {
           setState(() {

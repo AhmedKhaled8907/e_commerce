@@ -123,7 +123,12 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent),
+                    backgroundColor: Colors.blueAccent.shade700,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 36,
+                      vertical: 12,
+                    ),
+                  ),
                   onPressed: () {},
                   icon: const Icon(
                     Icons.login,
@@ -138,7 +143,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
             ],
           ),
         ),
