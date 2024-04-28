@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             onChanged: (value) {
               themeProvider.setDarkTheme(themeValue: value);
             },
-          )
+          ),
         ],
       ),
     );

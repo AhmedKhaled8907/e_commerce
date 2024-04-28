@@ -93,6 +93,10 @@ class Assets {
   /// assets/images/profile/logout.png
   static const String imagesProfileLogout = "assets/images/profile/logout.png";
 
+  /// Assets for imagesProfilePicture
+  /// assets/images/profile_picture.png
+  static const String imagesProfilePicture = "assets/images/profile_picture.png";
+
   /// Assets for imagesProfilePrivacy
   /// assets/images/profile/privacy.png
   static const String imagesProfilePrivacy = "assets/images/profile/privacy.png";

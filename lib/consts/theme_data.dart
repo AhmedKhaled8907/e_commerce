@@ -15,6 +15,17 @@ class Styles {
           ? const Color.fromARGB(255, 13, 6, 37)
           : AppColors.lightCardColor,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+      appBarTheme: AppBarTheme(
+        backgroundColor: isDarkTheme
+            ? AppColors.darkScaffoldColor
+            : AppColors.lightScaffoldColor,
+        elevation: 0,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          color: isDarkTheme ? Colors.white : Colors.black,
+        ),
+      ),
     );
   }
 }
