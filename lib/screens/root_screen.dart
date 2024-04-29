@@ -18,7 +18,9 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CartScreen(isEmpty: false,),
+    const CartScreen(
+      isEmpty: false,
+    ),
     const ProfileScreen(),
   ];
 
@@ -62,7 +64,10 @@ class _RootScreenState extends State<RootScreen> {
           ),
           NavigationDestination(
             selectedIcon: Icon(IconlyBold.bag2),
-            icon: Icon(IconlyLight.bag2),
+            icon: Badge(
+              label: Text('5'),
+              child: Icon(IconlyLight.bag2),
+            ),
             label: 'Cart',
           ),
           NavigationDestination(

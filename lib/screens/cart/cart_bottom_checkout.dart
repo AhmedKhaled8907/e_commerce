@@ -12,8 +12,8 @@ class CartBottomCheckout extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         border: Border(
           top: BorderSide(
-            color: Colors.grey.shade700,
-            width: 1,
+            color: Colors.grey.shade500,
+            width: 1.5,
           ),
         ),
       ),
