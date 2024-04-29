@@ -1,4 +1,4 @@
-import 'package:e_commerce/screens/cart_screen.dart';
+import 'package:e_commerce/screens/cart/cart_screen.dart';
 import 'package:e_commerce/screens/home_screen.dart';
 import 'package:e_commerce/screens/profile_screen.dart';
 import 'package:e_commerce/screens/search_screen.dart';
@@ -18,7 +18,7 @@ class _RootScreenState extends State<RootScreen> {
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CartScreen(),
+    const CartScreen(isEmpty: false,),
     const ProfileScreen(),
   ];
 
