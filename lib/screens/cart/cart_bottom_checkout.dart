@@ -10,20 +10,29 @@ class CartBottomCheckout extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
-        border: const Border(
-          top: BorderSide(color: Colors.grey, width: 2),
+        border: Border(
+          top: BorderSide(
+            color: Colors.grey.shade700,
+            width: 1,
+          ),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TitleText(label: 'Total (6 products /6 items)'),
-                SubtitleText(label: '\$ 300.00'),
+                const FittedBox(
+                  child: TitleText(label: 'Total (6 products /6 items)'),
+                ),
+                SubtitleText(
+                  label: '\$ 300.00',
+                  color: Colors.blueAccent.shade700,
+                  fontWeight: FontWeight.w500,
+                ),
               ],
             ),
             ElevatedButton(

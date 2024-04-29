@@ -1,3 +1,4 @@
+import 'package:e_commerce/screens/cart/quantity_bottom_sheet.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -63,16 +64,27 @@ class CartBody extends StatelessWidget {
                       children: [
                         SubtitleText(
                           label: '\$20',
-                          fontSize: 20,
+                          fontSize: 24,
                           color: Colors.blueAccent.shade400,
+                          fontWeight: FontWeight.w500,
                         ),
                         OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              useSafeArea: true,
+                              elevation: 0,
+                              context: context,
+                              builder: (context) => const QuantityBottomSheet(),
+                            );
+                          },
                           icon: const Icon(IconlyLight.arrowDown2),
                           label: SubtitleText(
                             label: 'Qty 5',
                             fontSize: 20,
                             color: Colors.blueAccent.shade400,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
