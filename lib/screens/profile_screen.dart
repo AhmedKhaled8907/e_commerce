@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
+import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -154,8 +155,11 @@ class ProfileScreen extends StatelessWidget {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      leading: Image.asset(Assets.imagesBagShoppingCart),
-      title: const Text('SmartShop'),
+      leading: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Image.asset(Assets.imagesBagShoppingCart),
+      ),
+      title: const AppNameText(),
     );
   }
 }
