@@ -159,7 +159,7 @@ class ProfileScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Image.asset(Assets.imagesBagShoppingCart),
       ),
-      title: const AppNameText(),
+      title: const AppNameText(title: 'Smart Shop'),
     );
   }
 }
