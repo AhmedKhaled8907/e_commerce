@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/screens/cart/cart_body.dart';
+import 'package:e_commerce/screens/cart/cart_bottom_checkout.dart';
 import 'package:e_commerce/widgets/custom_empty_bag.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -37,11 +38,18 @@ class CartScreen extends StatelessWidget {
                 ),
               ],
             ),
-            body: ListView.builder(
-                itemCount: 15,
-                itemBuilder: (context, index) {
-                  return const CartBody();
-                }),
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: 15,
+                      itemBuilder: (context, index) {
+                        return const CartBody();
+                      }),
+                ),
+                const CartBottomCheckout(),
+              ],
+            ),
           );
   }
 }

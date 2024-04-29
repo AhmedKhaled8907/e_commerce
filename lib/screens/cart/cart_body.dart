@@ -38,11 +38,12 @@ class CartBody extends StatelessWidget {
                           child: SizedBox(
                             width: size.width * 0.6,
                             child: TitleText(
-                              label: 'label' * 10,
+                              label: 'label ' * 10,
                               maxLines: 2,
                             ),
                           ),
                         ),
+                        const SizedBox(width: 4),
                         Column(
                           children: [
                             IconButton(
@@ -54,7 +55,7 @@ class CartBody extends StatelessWidget {
                               icon: const Icon(IconlyLight.heart),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                     Row(
