@@ -1,43 +1,53 @@
-import 'package:e_commerce/providers/theme_provider.dart';
-import 'package:e_commerce/widgets/subtitle_text.dart';
-import 'package:e_commerce/widgets/title_text.dart';
+import 'package:card_swiper/card_swiper.dart';
+import 'package:e_commerce/consts/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import '../consts/assets.dart';
+import '../widgets/app_name_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: buildAppBar(context),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SubtitleText(
-            label: 'Hi Again!',
-            fontSize: 60,
-          ),
-          const Card(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Hello World',
-                style: TextStyle(fontSize: 24),
+          SizedBox(
+            height: size.height * 0.24,
+            // width: double.infinity,
+            child: Swiper(
+              itemCount: AppConstants.bannersImages.length,
+              itemBuilder: (context, index) {
+                return Image.asset(
+                  AppConstants.bannersImages[index],
+                  fit: BoxFit.fill,
+                );
+              },
+              autoplay: true,
+              pagination: const SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+                  color: Colors.grey,
+                ),
               ),
             ),
           ),
-          TitleText(label: 'label ' * 10),
-          SwitchListTile(
-            title:
-                Text(themeProvider.getIsDarkTheme ? 'Dark Mode' : 'Light Mode'),
-            value: themeProvider.getIsDarkTheme,
-            onChanged: (value) {
-              themeProvider.setDarkTheme(themeValue: value);
-            },
-          ),
         ],
       ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      leading: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Image.asset(Assets.imagesBagShoppingCart),
+      ),
+      title: const AppNameText(title: 'Smart Shop'),
     );
   }
 }
