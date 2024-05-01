@@ -14,7 +14,7 @@ class LatestArrival extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: SizedBox(
-        width: size.width * 0.45,
+        width: size.width * 0.5,
         child: Padding(
           padding: const EdgeInsets.only(right: 8),
           child: Row(
@@ -25,8 +25,8 @@ class LatestArrival extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: FancyShimmerImage(
                     imageUrl: AppConstants.productImage,
-                    width: size.width * 0.28,
-                    height: size.width * 0.28,
+                    width: size.width * 0.3,
+                    height: size.width * 0.3,
                   ),
                 ),
               ),

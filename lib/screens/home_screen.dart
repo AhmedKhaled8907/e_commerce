@@ -1,5 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/app_constants.dart';
+import 'package:e_commerce/widgets/products/categories_widget.dart';
 import 'package:e_commerce/widgets/products/latest_arrival.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -15,46 +17,65 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: size.height * 0.24,
-              // width: double.infinity,
-              child: Swiper(
-                itemCount: AppConstants.bannersImages.length,
-                itemBuilder: (context, index) {
-                  return Image.asset(
-                    AppConstants.bannersImages[index],
-                    fit: BoxFit.fill,
-                  );
-                },
-                autoplay: true,
-                pagination: const SwiperPagination(
-                  builder: DotSwiperPaginationBuilder(
-                    color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: size.height * 0.24,
+                // width: double.infinity,
+                child: Swiper(
+                  itemCount: AppConstants.bannersImages.length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(
+                      AppConstants.bannersImages[index],
+                      fit: BoxFit.fill,
+                    );
+                  },
+                  autoplay: true,
+                  pagination: const SwiperPagination(
+                    builder: DotSwiperPaginationBuilder(
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 32),
-            const TitleText(
-              label: 'Latest Arrivals',
-              fontSize: 24,
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: size.height * 0.2,
-              child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => const LatestArrival(),
+              const SizedBox(height: 32),
+              const TitleText(
+                label: 'Latest Arrivals',
+                fontSize: 24,
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              SizedBox(
+                height: size.height * 0.175,
+                child: ListView.builder(
+                  itemCount: 10,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => const LatestArrival(),
+                ),
+              ),
+              // const SizedBox(height: 16),
+              const TitleText(
+                label: 'Categories',
+                fontSize: 24,
+              ),
+              const SizedBox(height: 16),
+              DynamicHeightGridView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                builder: (context, index) {
+                  return CategoriesWidget(
+                    categoriesModel: AppConstants.categories[index],
+                  );
+                },
+                itemCount: AppConstants.categories.length,
+                crossAxisCount: 4,
+              ),
+            ],
+          ),
         ),
       ),
     );
