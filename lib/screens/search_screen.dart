@@ -1,7 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
-import 'package:e_commerce/widgets/product_widget.dart';
+import 'package:e_commerce/widgets/products/product_widget.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

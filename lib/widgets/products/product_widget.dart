@@ -26,7 +26,10 @@ class ProductWidget extends StatelessWidget {
             children: [
               Flexible(
                 flex: 5,
-                child: TitleText(label: 'label' * 10),
+                child: TitleText(
+                  label: 'label ' * 10,
+                  maxLines: 2,
+                ),
               ),
               Flexible(
                 child: IconButton(
@@ -36,6 +39,7 @@ class ProductWidget extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -54,7 +58,7 @@ class ProductWidget extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.add_shopping_cart_rounded,
-                        size: 20,
+                        size: 24,
                         color: Colors.white,
                       ),
                     ),
