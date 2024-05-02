@@ -1,7 +1,7 @@
 import 'package:e_commerce/consts/theme_data.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
-import 'package:e_commerce/screens/root_screen.dart';
+import 'package:e_commerce/screens/auth/login_screen.dart';
 import 'package:e_commerce/screens/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             isDarkTheme: themeProvider.getIsDarkTheme,
             context: context,
           ),
-          home: const RootScreen(),
+          home: const LoginScreen(),
           routes: {
             ProductDetails.routeName: (context) => const ProductDetails(),
             WishlistScreen.routeName: (context) => const WishlistScreen(),
