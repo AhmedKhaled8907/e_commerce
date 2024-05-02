@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/theme_data.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
+import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/screens/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
             context: context,
           ),
           home: const RootScreen(),
+          routes: {
+            ProductDetails.routeName: (context) => const ProductDetails(),
+          },
         );
       }),
     );

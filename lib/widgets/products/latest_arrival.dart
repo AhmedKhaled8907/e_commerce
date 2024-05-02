@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts/app_constants.dart';
+import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,9 @@ class LatestArrival extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () async {
+        await Navigator.of(context).pushNamed(ProductDetails.routeName);
+      },
       child: SizedBox(
         width: size.width * 0.5,
         child: Padding(
