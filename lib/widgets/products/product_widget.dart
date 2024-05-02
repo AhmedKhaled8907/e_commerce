@@ -1,6 +1,5 @@
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
-import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class ProductWidget extends StatelessWidget {
         await Navigator.of(context).pushNamed(ProductDetails.routeName);
       },
       child: Padding(
-        padding: const EdgeInsets.all(2),
+        padding: const EdgeInsets.all(6),
         child: Column(
           children: [
             ClipRRect(
@@ -45,24 +44,28 @@ class ProductWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Flexible(
+                Flexible(
                   flex: 3,
-                  child: SubtitleText(label: '\$166'),
+                  child: TitleText(
+                    label: '\$166',
+                    color: Colors.blueAccent.shade200,
+                    fontSize: 24,
+                  ),
                 ),
                 Flexible(
-                  child: Material(
-                    borderRadius: BorderRadius.circular(18),
-                    color: Colors.lightBlue,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(18),
-                      onTap: () {},
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add_shopping_cart_rounded,
-                          size: 24,
-                          color: Colors.white,
-                        ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {},
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.lightBlue.shade200,
+                      ),
+                      child: const Icon(
+                        Icons.add_shopping_cart_rounded,
+                        size: 24,
+                        color: Colors.black,
                       ),
                     ),
                   ),

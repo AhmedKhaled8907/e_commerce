@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomEmptyBag extends StatelessWidget {
   final String title, subtitle, imagePath;
-  
+
   const CustomEmptyBag({
     super.key,
     required this.title,
@@ -31,14 +31,13 @@ class CustomEmptyBag extends StatelessWidget {
             color: Colors.red,
           ),
           const SizedBox(height: 16),
-           SubtitleText(
+          SubtitleText(
             label: title,
             fontSize: 24,
           ),
           const SizedBox(height: 24),
-           SubtitleText(
-            label:
-                subtitle,
+          SubtitleText(
+            label: subtitle,
             fontSize: 18,
             fontWeight: FontWeight.w400,
           ),

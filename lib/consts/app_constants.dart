@@ -11,38 +11,37 @@ class AppConstants {
   ];
 
   static List<CategoriesModel> categories = [
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesMobiles,
-    title: 'Phones',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesPc,
-    title: 'Laptops',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesElectronics,
-    title: 'Electronics',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesWatch,
-    title: 'Watches',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesFashion,
-    title: 'Clothes',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesShoes,
-    title: 'Shoes',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesBookImg,
-    title: 'Books',
-  ),
-  CategoriesModel(
-    imagePath: Assets.imagesCategoriesCosmetics,
-    title: 'Cosmetics',
-  ),
-];
-
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesMobiles,
+      title: 'Phones',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesPc,
+      title: 'Laptops',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesElectronics,
+      title: 'Electronics',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesWatch,
+      title: 'Watches',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesFashion,
+      title: 'Clothes',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesShoes,
+      title: 'Shoes',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesBookImg,
+      title: 'Books',
+    ),
+    CategoriesModel(
+      imagePath: Assets.imagesCategoriesCosmetics,
+      title: 'Cosmetics',
+    ),
+  ];
 }

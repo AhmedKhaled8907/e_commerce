@@ -20,7 +20,7 @@ class CustomListTile extends StatelessWidget {
       minVerticalPadding: 16,
       horizontalTitleGap: 20,
       contentPadding: const EdgeInsets.only(right: 12),
-      onTap: () {},
+      onTap: onTap,
       leading: Image.asset(
         imagePath,
         height: 46,

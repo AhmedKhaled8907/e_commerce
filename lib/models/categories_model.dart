@@ -1,4 +1,3 @@
-
 class CategoriesModel {
   final String imagePath, title;
 
@@ -7,4 +6,3 @@ class CategoriesModel {
     required this.title,
   });
 }
-
