@@ -1,9 +1,9 @@
 import 'package:e_commerce/consts/app_constants.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
+import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class LatestArrival extends StatelessWidget {
   const LatestArrival({super.key});
@@ -48,10 +48,7 @@ class LatestArrival extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(IconlyLight.heart),
-                          ),
+                          const HeartButtonWidget(),
                           IconButton(
                             onPressed: () {},
                             icon: const Icon(

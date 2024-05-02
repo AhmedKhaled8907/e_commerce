@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/app_constants.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
+import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -57,18 +58,9 @@ class ProductDetails extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: Colors.lightBlue.shade400,
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          IconlyLight.heart,
-                          color: Colors.black,
-                        ),
-                      ),
+                    const HeartButtonWidget(
+                      color: Colors.lightBlue,
+                      iconColor: Colors.black,
                     ),
                     const SizedBox(width: 24),
                     Expanded(

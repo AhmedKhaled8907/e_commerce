@@ -1,9 +1,9 @@
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
+import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({super.key});
@@ -36,11 +36,8 @@ class ProductWidget extends StatelessWidget {
                     maxLines: 2,
                   ),
                 ),
-                Flexible(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(IconlyLight.heart),
-                  ),
+                const Flexible(
+                  child: HeartButtonWidget(),
                 ),
               ],
             ),

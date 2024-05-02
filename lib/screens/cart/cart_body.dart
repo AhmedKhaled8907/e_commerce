@@ -1,4 +1,5 @@
 import 'package:e_commerce/screens/cart/quantity_bottom_sheet.dart';
+import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -51,10 +52,7 @@ class CartBody extends StatelessWidget {
                               onPressed: () {},
                               icon: const Icon(Icons.clear),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(IconlyLight.heart),
-                            ),
+                            const HeartButtonWidget(),
                           ],
                         ),
                       ],
