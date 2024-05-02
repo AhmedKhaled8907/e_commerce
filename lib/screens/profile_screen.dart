@@ -2,6 +2,7 @@ import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/screens/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/wishlist_screen.dart';
+import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
@@ -138,11 +139,18 @@ class ProfileScreen extends StatelessWidget {
                       vertical: 12,
                     ),
                   ),
-                  onPressed: () {},
                   icon: const Icon(
                     Icons.login,
                     color: Colors.white,
                   ),
+                  onPressed: () async {
+                   await MyAppServices.showErrorOrWarningDialog(
+                      context: context,
+                      subtitle: 'Are you Sure?',
+                      onPressed: () {},
+                      isError: false,
+                    );
+                  },
                   label: const Text(
                     'Login',
                     style: TextStyle(
