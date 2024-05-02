@@ -2,6 +2,7 @@ import 'package:e_commerce/consts/theme_data.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/screens/root_screen.dart';
+import 'package:e_commerce/screens/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           routes: {
             ProductDetails.routeName: (context) => const ProductDetails(),
             WishlistScreen.routeName: (context) => const WishlistScreen(),
+            ViewdRecently.routeName: (context) => const ViewdRecently(),
           },
         );
       }),
