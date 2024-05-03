@@ -58,10 +58,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _registerUser() async {
-    if (_formKey.currentState!.validate()) {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
       _formKey.currentState!.save();
       FocusScope.of(context).unfocus();
     }
+
+    if (isValid) {
+      if (_pickedImage == null) {
+        MyAppServices.showErrorOrWarningDialog(
+          context: context,
+          subtitle: 'Please pick an image',
+          onPressed: () {},
+        );
+      }
+    }
+  }
+
+  Future<void> _localImagePicker() async {
+    final ImagePicker picker = ImagePicker();
+    await MyAppServices.showImagePickerDialog(
+      context: context,
+      onPressedCamera: () async {
+        _pickedImage = await picker.pickImage(source: ImageSource.camera);
+        setState(() {});
+      },
+      onPressedGallery: () async {
+        _pickedImage = await picker.pickImage(source: ImageSource.gallery);
+        setState(() {});
+      },
+      onPressedRemove: () {
+        setState(() {
+          _pickedImage = null;
+        });
+      },
+    );
   }
 
   @override
@@ -72,7 +103,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -103,15 +136,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: size.width * 0.3,
                         width: size.width * 0.3,
                         child: PickImage(
-                          onTap: () async {
-                            await MyAppServices.showImagePickerDialog(
-                              context: context,
-                              onPressedCamera: () {},
-                              onPressedGallery: () {},
-                              onPressedRemove: () {},
-                            );
-                          },
                           pickedImage: _pickedImage,
+                          onTap: () async {
+                            await _localImagePicker();
+                          },
                         ),
                       ),
                     ),

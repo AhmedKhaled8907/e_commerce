@@ -67,9 +67,9 @@ class MyAppServices {
 
   static Future<void> showImagePickerDialog({
     required BuildContext context,
-    required void Function()? onPressedCamera,
-    required void Function()? onPressedGallery,
-    required void Function()? onPressedRemove,
+    required  Function onPressedCamera,
+    required  Function onPressedGallery,
+    required  Function onPressedRemove,
   }) async {
     await showDialog(
       context: context,
@@ -83,10 +83,10 @@ class MyAppServices {
             children: [
               TextButton.icon(
                 onPressed: () {
+                  onPressedCamera();
                   if (Navigator.canPop(context)) {
                     Navigator.pop(context);
                   }
-                  onPressedCamera;
                 },
                 icon: const Padding(
                   padding: EdgeInsets.only(right: 16),
@@ -102,10 +102,10 @@ class MyAppServices {
               ),
               TextButton.icon(
                 onPressed: () {
+                  onPressedGallery();
                   if (Navigator.canPop(context)) {
                     Navigator.pop(context);
                   }
-                  onPressedGallery;
                 },
                 icon: const Padding(
                   padding: EdgeInsets.only(right: 16),
@@ -121,10 +121,10 @@ class MyAppServices {
               ),
               TextButton.icon(
                 onPressed: () {
+                  onPressedRemove();
                   if (Navigator.canPop(context)) {
                     Navigator.pop(context);
                   }
-                  onPressedRemove;
                 },
                 icon: const Padding(
                   padding: EdgeInsets.only(right: 16),
