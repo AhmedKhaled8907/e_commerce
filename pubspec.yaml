@@ -35,6 +35,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
+  image_picker: ^1.1.1
   ionicons: ^0.2.2
   provider: ^6.1.2
   shared_preferences: ^2.2.3

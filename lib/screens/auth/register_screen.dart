@@ -1,6 +1,8 @@
 import 'package:e_commerce/consts/my_validators.dart';
+import 'package:e_commerce/widgets/auth/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../widgets/app_name_text.dart';
 import '../../widgets/subtitle_text.dart';
@@ -25,8 +27,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late FocusNode _passwordFocusNode;
   late FocusNode _repeatPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
-
   bool obscureText = true;
+  XFile? _pickedImage;
 
   @override
   void initState() {
@@ -63,6 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -83,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fontSize: 32,
                       ),
                     ),
-                    const SizedBox(height: 64),
+                    const SizedBox(height: 24),
                     const TitleText(
                       label: 'Hi There, Welcome',
                       fontSize: 26,
@@ -93,7 +96,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           'Sign up now to recieve special offers and updates from our app.',
                       fontSize: 14,
                     ),
-                    const SizedBox(height: 48),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: SizedBox(
+                        height: size.width * 0.3,
+                        width: size.width * 0.3,
+                        child: PickImage(
+                          onTap: () {},
+                          pickedImage: _pickedImage,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 36),
                     Form(
                       key: _formKey,
                       child: Column(
