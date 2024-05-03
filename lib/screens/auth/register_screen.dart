@@ -1,6 +1,8 @@
 import 'package:e_commerce/consts/my_validators.dart';
 import 'package:e_commerce/widgets/auth/pick_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -235,26 +237,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 48),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const TitleText(
-                                label: 'Have an account already? ',
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const TitleText(
-                                  label: 'Sign In',
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    const Expanded(child: SizedBox()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const TitleText(
+                          label: 'Have an account already? ',
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const TitleText(
+                            label: 'Sign In',
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
