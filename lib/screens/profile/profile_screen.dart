@@ -1,7 +1,7 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
-import 'package:e_commerce/screens/viewed_recently_screen.dart';
-import 'package:e_commerce/screens/wishlist_screen.dart';
+import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
+import 'package:e_commerce/screens/profile/wishlist_screen.dart';
 import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
@@ -9,7 +9,7 @@ import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/custom_list_tile.dart';
+import '../../widgets/custom_list_tile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

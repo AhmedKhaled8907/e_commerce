@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts/my_validators.dart';
+import 'package:e_commerce/widgets/auth/google_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/app_name_text.dart';
@@ -172,23 +173,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 32),
                           Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 2,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.blueGrey,
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 8),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  onPressed: () {},
-                                  child: const TitleText(
-                                    label: 'Login with Google',
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                child: GoogleButton(),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
@@ -231,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
