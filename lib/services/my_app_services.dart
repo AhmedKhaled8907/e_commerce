@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
+import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
 class MyAppServices {
@@ -59,6 +60,86 @@ class MyAppServices {
               ],
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  static Future<void> showImagePickerDialog({
+    required BuildContext context,
+    required void Function()? onPressedCamera,
+    required void Function()? onPressedGallery,
+    required void Function()? onPressedRemove,
+  }) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        title: const Center(child: TitleText(label: 'Choose option')),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                  onPressedCamera;
+                },
+                icon: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(
+                    Icons.camera_alt_rounded,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+                label: const SubtitleText(
+                  label: 'Camera',
+                  color: Colors.lightBlue,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                  onPressedGallery;
+                },
+                icon: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(
+                    Icons.image_rounded,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+                label: const SubtitleText(
+                  label: 'Gallery',
+                  color: Colors.lightBlue,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                  onPressedRemove;
+                },
+                icon: const Padding(
+                  padding: EdgeInsets.only(right: 16),
+                  child: Icon(
+                    Icons.clear,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+                label: const SubtitleText(
+                  label: 'Remove',
+                  color: Colors.lightBlue,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

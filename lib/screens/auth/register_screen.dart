@@ -1,8 +1,7 @@
 import 'package:e_commerce/consts/my_validators.dart';
+import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/auth/pick_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -104,7 +103,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: size.width * 0.3,
                         width: size.width * 0.3,
                         child: PickImage(
-                          onTap: () {},
+                          onTap: () async {
+                            await MyAppServices.showImagePickerDialog(
+                              context: context,
+                              onPressedCamera: () {},
+                              onPressedGallery: () {},
+                              onPressedRemove: () {},
+                            );
+                          },
                           pickedImage: _pickedImage,
                         ),
                       ),

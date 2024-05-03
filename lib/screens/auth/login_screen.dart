@@ -2,7 +2,6 @@ import 'package:e_commerce/consts/my_validators.dart';
 import 'package:e_commerce/screens/auth/register_screen.dart';
 import 'package:e_commerce/widgets/auth/google_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../../widgets/app_name_text.dart';
