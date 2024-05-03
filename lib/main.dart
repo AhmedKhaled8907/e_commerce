@@ -2,9 +2,11 @@ import 'package:e_commerce/consts/theme_data.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/screens/auth/login_screen.dart';
 import 'package:e_commerce/screens/auth/register_screen.dart';
+import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/profile/wishlist_screen.dart';
+import 'package:e_commerce/screens/root_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -36,12 +38,14 @@ class MyApp extends StatelessWidget {
             isDarkTheme: themeProvider.getIsDarkTheme,
             context: context,
           ),
-          home: const LoginScreen(),
+          home: const RootScreen(),
           routes: {
             ProductDetails.routeName: (context) => const ProductDetails(),
             WishlistScreen.routeName: (context) => const WishlistScreen(),
             ViewdRecently.routeName: (context) => const ViewdRecently(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
+            LoginScreen.routeName: (context) => const LoginScreen(),
+            OrdersScreen.routeName: (context) => const OrdersScreen(),
           },
         );
       }),

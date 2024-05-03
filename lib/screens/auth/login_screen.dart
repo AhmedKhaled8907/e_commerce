@@ -9,6 +9,8 @@ import '../../widgets/subtitle_text.dart';
 import '../../widgets/title_text.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/LoginScreen';
+
   const LoginScreen({super.key});
 
   @override

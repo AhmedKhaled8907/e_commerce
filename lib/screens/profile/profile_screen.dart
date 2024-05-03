@@ -1,5 +1,6 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
+import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/profile/wishlist_screen.dart';
 import 'package:e_commerce/services/my_app_services.dart';
@@ -73,7 +74,9 @@ class ProfileScreen extends StatelessWidget {
               CustomListTile(
                 imagePath: Assets.imagesBagOrderSvg,
                 title: 'All Orders',
-                onTap: () {},
+                onTap: () async {
+                  await Navigator.of(context).pushNamed(OrdersScreen.routeName);
+                },
               ),
               CustomListTile(
                 imagePath: Assets.imagesBagWishlistSvg,
@@ -144,7 +147,7 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () async {
-                   await MyAppServices.showErrorOrWarningDialog(
+                    await MyAppServices.showErrorOrWarningDialog(
                       context: context,
                       subtitle: 'Are you Sure?',
                       onPressed: () {},
