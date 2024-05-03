@@ -116,7 +116,7 @@ class ProductDetails extends StatelessWidget {
           ),
         ),
       ],
-      title: const AppNameText(title: 'Smart Shop'),
+      title: const AppNameText(),
     );
   }
 }

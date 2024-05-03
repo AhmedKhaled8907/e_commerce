@@ -1,7 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/assets.dart';
-import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/products/product_widget.dart';
+import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -39,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Image.asset(Assets.imagesBagShoppingCart),
           ),
-          title: const AppNameText(title: 'Search'),
+          title: const TitleText(label: 'Search'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

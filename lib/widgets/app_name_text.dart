@@ -6,11 +6,9 @@ class AppNameText extends StatelessWidget {
   const AppNameText({
     super.key,
     this.fontSize = 24,
-    required this.title,
   });
 
   final double fontSize;
-  final String title;
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -18,7 +16,7 @@ class AppNameText extends StatelessWidget {
       highlightColor: Colors.red,
       period: const Duration(seconds: 10),
       child: TitleText(
-        label: title,
+        label: 'ShopSmart',
         fontSize: fontSize,
       ),
     );
