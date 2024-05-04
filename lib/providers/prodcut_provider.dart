@@ -4,10 +4,18 @@ import 'package:uuid/uuid.dart';
 
 class ProductProvider extends ChangeNotifier {
   List<ProductModel> get getProducts {
-    return localProds;
+    return _products;
   }
 
-  final List<ProductModel> localProds = [
+  ProductModel? findProductById(String productId) {
+    if (_products.where((element) => element.productId == productId).isEmpty) {
+      return null;
+    } else {
+      return _products.firstWhere((element) => element.productId == productId);
+    }
+  }
+
+  final List<ProductModel> _products = [
     // Phones
     ProductModel(
       //1

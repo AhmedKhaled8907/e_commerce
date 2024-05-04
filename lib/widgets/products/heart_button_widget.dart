@@ -18,18 +18,13 @@ class HeartButtonWidget extends StatefulWidget {
 class _HeartButtonWidgetState extends State<HeartButtonWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: widget.color,
-      ),
-      child: IconButton(
-        onPressed: () {},
-        icon: Icon(
-          IconlyLight.heart,
-          // color: widget.iconColor,
-          size: widget.size,
-        ),
+    return IconButton(
+      splashColor: Colors.transparent,
+      onPressed: () {},
+      icon: Icon(
+        IconlyLight.heart,
+        // color: widget.iconColor,
+        size: widget.size,
       ),
     );
   }

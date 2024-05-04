@@ -16,7 +16,7 @@ class ViewdRecently extends StatelessWidget {
         itemCount: 20,
         crossAxisCount: 2,
         builder: (context, index) {
-          return const ProductWidget();
+          return const ProductWidget(productId: '',);
         },
       ),
     );
