@@ -1,4 +1,7 @@
-class ProductModel {
+
+import 'package:flutter/material.dart';
+
+class ProductModel with ChangeNotifier{
   final String productId,
       productTitle,
       productPrice,
@@ -16,4 +19,7 @@ class ProductModel {
     required this.productImage,
     required this.productQuantity,
   });
+
+  
+ 
 }

@@ -3,14 +3,12 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 class HeartButtonWidget extends StatefulWidget {
   final Color color;
-  final Color iconColor;
   final double size;
 
   const HeartButtonWidget({
     super.key,
     this.color = Colors.transparent,
     this.size = 24,
-    this.iconColor = Colors.white,
   });
 
   @override
@@ -29,7 +27,7 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
         onPressed: () {},
         icon: Icon(
           IconlyLight.heart,
-          color: widget.iconColor,
+          // color: widget.iconColor,
           size: widget.size,
         ),
       ),

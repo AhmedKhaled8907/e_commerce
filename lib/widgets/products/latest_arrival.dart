@@ -54,7 +54,6 @@ class LatestArrival extends StatelessWidget {
                             icon: const Icon(
                               Icons.add_shopping_cart_rounded,
                               size: 24,
-                              color: Colors.white,
                             ),
                           ),
                         ],

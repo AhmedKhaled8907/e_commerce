@@ -60,7 +60,6 @@ class ProductDetails extends StatelessWidget {
                   children: [
                     const HeartButtonWidget(
                       color: Colors.lightBlue,
-                      iconColor: Colors.black,
                     ),
                     const SizedBox(width: 24),
                     Expanded(
