@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts/my_validators.dart';
+import 'package:e_commerce/screens/auth/forgot_password_screen.dart';
 import 'package:e_commerce/screens/auth/register_screen.dart';
 import 'package:e_commerce/widgets/auth/google_button.dart';
 import 'package:flutter/material.dart';
@@ -139,15 +140,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                   await _loginUser();
                                 },
                               ),
-                              const SizedBox(height: 32),
-                              const Align(
+                              const SizedBox(height: 24),
+                              Align(
                                 alignment: Alignment.centerRight,
-                                child: Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontStyle: FontStyle.italic,
-                                    decoration: TextDecoration.underline,
+                                child: InkWell(
+                                  onTap: () async {
+                                    await Navigator.of(context).pushNamed(
+                                      ForgotPasswordScreen.routeName,
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontStyle: FontStyle.italic,
+                                      decoration: TextDecoration.underline,
+                                    ),
                                   ),
                                 ),
                               ),

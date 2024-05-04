@@ -1,9 +1,9 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
+import 'package:e_commerce/screens/auth/login_screen.dart';
 import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/profile/wishlist_screen.dart';
-import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
@@ -147,12 +147,8 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () async {
-                    await MyAppServices.showErrorOrWarningDialog(
-                      context: context,
-                      subtitle: 'Are you Sure?',
-                      onPressed: () {},
-                      isError: false,
-                    );
+                    await Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
                   },
                   label: const Text(
                     'Login',
