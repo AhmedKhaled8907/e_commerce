@@ -21,7 +21,10 @@ class ProductWidget extends StatelessWidget {
         ? const SizedBox.shrink()
         : GestureDetector(
             onTap: () async {
-              await Navigator.of(context).pushNamed(ProductDetails.routeName);
+              await Navigator.of(context).pushNamed(
+                ProductDetails.routeName,
+                arguments: currentProductId.productId,
+              );
             },
             child: Padding(
               padding: const EdgeInsets.all(6),
