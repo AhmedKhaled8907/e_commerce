@@ -1,3 +1,4 @@
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/app_constants.dart';
@@ -67,8 +68,10 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 builder: (context, index) {
-                  return CategoriesWidget(
-                    categoriesModel: AppConstants.categories[index],
+                  return GestureDetector(
+                    child: CategoriesWidget(
+                      categoriesModel: AppConstants.categories[index],
+                    ),
                   );
                 },
                 itemCount: AppConstants.categories.length,

@@ -1,4 +1,5 @@
 import 'package:e_commerce/models/categories_model.dart';
+import 'package:e_commerce/screens/search_screen.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,22 +14,30 @@ class CategoriesWidget extends StatelessWidget {
   final CategoriesModel categoriesModel;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(
-          height: 50,
-          width: 50,
-          categoriesModel.imagePath,
-          fit: BoxFit.fill,
-        ),
-        const SizedBox(height: 8),
-        FittedBox(
-          child: SubtitleText(
-            label: categoriesModel.title,
+    return GestureDetector(
+      onTap: () async {
+        await Navigator.of(context).pushNamed(
+          SearchScreen.routeName,
+          arguments: categoriesModel.title,
+        );
+      },
+      child: Column(
+        children: [
+          Image.asset(
+            height: 50,
+            width: 50,
+            categoriesModel.imagePath,
+            fit: BoxFit.fill,
           ),
-        ),
-        const SizedBox(height: 8),
-      ],
+          const SizedBox(height: 8),
+          FittedBox(
+            child: SubtitleText(
+              label: categoriesModel.title,
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
+      ),
     );
   }
 }

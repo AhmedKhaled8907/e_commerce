@@ -15,6 +15,23 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
+  List<ProductModel> findProductByCategory(String productCategoty) {
+    List<ProductModel> categoryList = _products
+        .where((element) => element.productCategory
+            .toLowerCase()
+            .contains(productCategoty.toLowerCase()))
+        .toList();
+    return categoryList;
+    // if (_products
+    //     .where((element) => element.productCategory == productCategoty)
+    //     .isEmpty) {
+    //   return null;
+    // }
+
+    // return _products
+    //     .firstWhere((element) => element.productCategory == productCategoty);
+  }
+
   final List<ProductModel> _products = [
     // Phones
     ProductModel(
