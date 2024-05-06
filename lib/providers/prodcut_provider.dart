@@ -32,7 +32,7 @@ class ProductProvider extends ChangeNotifier {
     //     .firstWhere((element) => element.productCategory == productCategoty);
   }
 
-  List<ProductModel> searchQuery({
+  List<ProductModel> searchQuery({  
     required String searchText,
     required List<ProductModel> selectedList,
   }) {

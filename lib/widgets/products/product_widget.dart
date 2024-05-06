@@ -1,3 +1,4 @@
+import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
@@ -15,6 +16,7 @@ class ProductWidget extends StatelessWidget {
     // final productModelProvider = Provider.of<ProductModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
     final currentProductId = productProvider.findProductById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return currentProductId == null
@@ -71,15 +73,27 @@ class ProductWidget extends StatelessWidget {
                       Flexible(
                         child: InkWell(
                           borderRadius: BorderRadius.circular(8),
-                          onTap: () {},
+                          onTap: () {
+                            if (cartProvider.isProductInCart(
+                              productId: currentProductId.productId,
+                            )) {
+                              return;
+                            }
+                            cartProvider.addProductToCart(
+                              productId: currentProductId.productId,
+                            );
+                          },
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               color: Colors.lightBlue.shade200,
                             ),
-                            child: const Icon(
-                              Icons.add_shopping_cart_rounded,
+                            child: Icon(
+                              cartProvider.isProductInCart(
+                                      productId: currentProductId.productId)
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_rounded,
                               size: 20,
                               color: Colors.black,
                             ),
