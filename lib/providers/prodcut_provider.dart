@@ -32,8 +32,11 @@ class ProductProvider extends ChangeNotifier {
     //     .firstWhere((element) => element.productCategory == productCategoty);
   }
 
-  List<ProductModel> searchQuery(String searchText) {
-    List<ProductModel> searchList = _products
+  List<ProductModel> searchQuery({
+    required String searchText,
+    required List<ProductModel> selectedList,
+  }) {
+    List<ProductModel> searchList = selectedList
         .where((element) => element.productTitle
             .toLowerCase()
             .contains(searchText.toLowerCase()))

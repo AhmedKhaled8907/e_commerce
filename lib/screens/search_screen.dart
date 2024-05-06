@@ -79,14 +79,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    searchList =
-                        productProvider.searchQuery(searchController.text);
+                    searchList = productProvider.searchQuery(
+                      searchText: searchController.text,
+                      selectedList: procutsList,
+                    );
                   });
                 },
                 onSubmitted: (value) {
                   setState(() {
-                    searchList =
-                        productProvider.searchQuery(searchController.text);
+                    searchList = productProvider.searchQuery(
+                      searchText: searchController.text,
+                      selectedList: procutsList,
+                    );
                   });
                 },
               ),
