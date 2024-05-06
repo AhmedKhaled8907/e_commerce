@@ -17,6 +17,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late TextEditingController searchController;
+  List<ProductModel> searchList = [];
 
   @override
   void initState() {
@@ -76,29 +77,43 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
-                onChanged: (value) {},
-                onSubmitted: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    searchList =
+                        productProvider.searchQuery(searchController.text);
+                  });
+                },
+                onSubmitted: (value) {
+                  setState(() {
+                    searchList =
+                        productProvider.searchQuery(searchController.text);
+                  });
+                },
               ),
               const SizedBox(height: 24),
-              procutsList.isEmpty
-                  ? const Align(
-                      alignment: Alignment.center,
-                      child: TitleText(label: 'No Products found'),
-                    )
-                  : Expanded(
-                      child: DynamicHeightGridView(
-                        itemCount: procutsList.length,
-                        crossAxisCount: 2,
-                        builder: (context, index) {
-                          return ChangeNotifierProvider.value(
-                            value: procutsList[index],
-                            child: ProductWidget(
-                              productId: procutsList[index].productId,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+              if (searchController.text.isNotEmpty && searchList.isEmpty) ...[
+                const Center(
+                  child: TitleText(
+                    label: 'No results found',
+                    fontSize: 32,
+                  ),
+                ),
+              ],
+              Expanded(
+                child: DynamicHeightGridView(
+                  itemCount: searchController.text.isNotEmpty
+                      ? searchList.length
+                      : procutsList.length,
+                  crossAxisCount: 2,
+                  builder: (context, index) {
+                    return ProductWidget(
+                      productId: searchController.text.isNotEmpty
+                          ? searchList[index].productId
+                          : procutsList[index].productId,
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
