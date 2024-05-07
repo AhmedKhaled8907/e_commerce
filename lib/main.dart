@@ -5,6 +5,7 @@ import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/screens/auth/forgot_password_screen.dart';
 import 'package:e_commerce/screens/auth/login_screen.dart';
 import 'package:e_commerce/screens/auth/register_screen.dart';
+import 'package:e_commerce/screens/home_screen.dart';
 import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ProductProvider(),
-        ), ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (context) => CartProvider(),
         ),
       ],
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const RootScreen(),
           routes: {
+            HomeScreen.routeName: (context) => const HomeScreen(),
             ProductDetails.routeName: (context) => const ProductDetails(),
             WishlistScreen.routeName: (context) => const WishlistScreen(),
             ViewdRecently.routeName: (context) => const ViewdRecently(),

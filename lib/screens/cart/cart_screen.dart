@@ -1,9 +1,11 @@
 import 'package:e_commerce/consts/assets.dart';
+import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/screens/cart/cart_body.dart';
 import 'package:e_commerce/screens/cart/cart_bottom_checkout.dart';
 import 'package:e_commerce/widgets/custom_empty_bag.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key, required this.isEmpty});
@@ -11,7 +13,9 @@ class CartScreen extends StatelessWidget {
   final bool isEmpty;
   @override
   Widget build(BuildContext context) {
-    return isEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    return cartProvider.getCarts.isEmpty
         ? const Scaffold(
             body: CustomEmptyBag(
               imagePath: Assets.imagesBagShoppingBasket,
@@ -27,8 +31,8 @@ class CartScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Image.asset(Assets.imagesBagShoppingCart),
               ),
-              title: const TitleText(
-                label: 'Cart (5)',
+              title: TitleText(
+                label: 'Cart (${cartProvider.getCarts.length})',
                 fontSize: 24,
               ),
               actions: [
@@ -42,9 +46,12 @@ class CartScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
-                      itemCount: 15,
+                      itemCount: cartProvider.getCarts.length,
                       itemBuilder: (context, index) {
-                        return const CartBody();
+                        return ChangeNotifierProvider.value(
+                          value: cartProvider.getCarts.values.toList()[index],
+                          child: const CartBody(),
+                        );
                       }),
                 ),
                 const CartBottomCheckout(),

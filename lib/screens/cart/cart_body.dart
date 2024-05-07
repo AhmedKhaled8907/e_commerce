@@ -1,3 +1,5 @@
+import 'package:e_commerce/models/cart_model.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/screens/cart/quantity_bottom_sheet.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
@@ -5,12 +7,18 @@ import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class CartBody extends StatelessWidget {
   const CartBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cartModel = Provider.of<CartModel>(context);
+    final productProvider = Provider.of<ProductProvider>(context);
+    final currentProductId =
+        productProvider.findProductById(cartModel.productId);
+
     Size size = MediaQuery.of(context).size;
     return FittedBox(
       child: IntrinsicWidth(
@@ -22,8 +30,7 @@ class CartBody extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: FancyShimmerImage(
-                  imageUrl:
-                      'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                  imageUrl: currentProductId!.productImage,
                   width: size.height * 0.2,
                   height: size.height * 0.2,
                 ),
@@ -40,7 +47,7 @@ class CartBody extends StatelessWidget {
                           child: SizedBox(
                             width: size.width * 0.6,
                             child: TitleText(
-                              label: 'label ' * 10,
+                              label: currentProductId.productTitle,
                               maxLines: 2,
                             ),
                           ),
@@ -61,7 +68,7 @@ class CartBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SubtitleText(
-                          label: '\$20',
+                          label: '\$${currentProductId.productPrice}',
                           fontSize: 24,
                           color: Colors.blueAccent.shade400,
                           fontWeight: FontWeight.w500,
@@ -79,14 +86,14 @@ class CartBody extends StatelessWidget {
                           },
                           icon: const Icon(IconlyLight.arrowDown2),
                           label: SubtitleText(
-                            label: 'Qty 5',
+                            label: currentProductId.productQuantity,
                             fontSize: 20,
                             color: Colors.blueAccent.shade400,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
