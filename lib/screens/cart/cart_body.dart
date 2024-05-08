@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/cart_provider.dart';
+
 class CartBody extends StatelessWidget {
   const CartBody({super.key});
 
@@ -18,6 +20,7 @@ class CartBody extends StatelessWidget {
     final productProvider = Provider.of<ProductProvider>(context);
     final getCurrProduct =
         productProvider.findProductById(cartModelProvider.productId);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return getCurrProduct == null
@@ -58,7 +61,11 @@ class CartBody extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cartProvider.removeProductFromCart(
+                                        productId: cartModelProvider.productId,
+                                      );
+                                    },
                                     icon: const Icon(Icons.clear),
                                   ),
                                   const HeartButtonWidget(),

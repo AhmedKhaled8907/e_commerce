@@ -37,7 +37,9 @@ class CartScreen extends StatelessWidget {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartProvider.clearAllCart();
+                  },
                   icon: const Icon(Icons.delete_forever_rounded),
                 ),
               ],
