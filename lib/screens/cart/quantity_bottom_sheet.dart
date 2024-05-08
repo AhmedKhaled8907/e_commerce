@@ -1,13 +1,18 @@
 import 'dart:developer';
 
+import 'package:e_commerce/models/cart_model.dart';
+import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuantityBottomSheet extends StatelessWidget {
-  const QuantityBottomSheet({super.key});
+  const QuantityBottomSheet({super.key, required this.cartModel});
 
+  final CartModel cartModel;
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -24,20 +29,27 @@ class QuantityBottomSheet extends StatelessWidget {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: 15,
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  log(index.toString());
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: Center(
-                    child: SubtitleText(
-                      label: (index + 1).toString(),
+              itemCount: 30,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    cartProvider.updateQuantity(
+                      productId: cartModel.productId,
+                      quantity: index + 1,
+                    );
+                    Navigator.of(context).pop();
+                    log((index + 1).toString());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Center(
+                      child: SubtitleText(
+                        label: (index + 1).toString(),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
           const SizedBox(height: 10),

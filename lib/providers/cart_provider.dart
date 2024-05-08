@@ -3,23 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class CartProvider extends ChangeNotifier {
-  final Map<String, CartModel> _carts = {};
+  final Map<String, CartModel> _cartItems = {};
 
   Map<String, CartModel> get getCarts {
-    return _carts;
+    return _cartItems;
   }
 
   bool isProductInCart({required String productId}) {
-    return _carts.containsKey(productId);
+    return _cartItems.containsKey(productId);
   }
 
   void addProductToCart({required String productId}) {
-    _carts.putIfAbsent(
+    _cartItems.putIfAbsent(
       productId,
       () => CartModel(
-        cardId: const Uuid().v4(),
+        cartId: const Uuid().v4(),
         productId: productId,
         quantity: 1,
+      ),
+    );
+    notifyListeners();
+  }
+
+  void updateQuantity({required String productId, required int quantity}) {
+    _cartItems.update(
+      productId,
+      (item) => CartModel(
+        cartId: item.cartId,
+        productId: productId,
+        quantity: quantity,
       ),
     );
     notifyListeners();

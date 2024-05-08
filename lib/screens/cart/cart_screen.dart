@@ -49,11 +49,15 @@ class CartScreen extends StatelessWidget {
                       itemCount: cartProvider.getCarts.length,
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
-                          value: cartProvider.getCarts.values.toList()[index],
+                          value: cartProvider.getCarts.values
+                              .toList()
+                              .reversed
+                              .toList()[index],
                           child: const CartBody(),
                         );
                       }),
                 ),
+                // const SizedBox(height: kBottomNavigationBarHeight + 10),
                 const CartBottomCheckout(),
               ],
             ),
