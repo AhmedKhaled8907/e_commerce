@@ -1,4 +1,5 @@
 import 'package:e_commerce/models/cart_model.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -45,5 +46,25 @@ class CartProvider extends ChangeNotifier {
   void clearAllCart() {
     _cartItems.clear();
     notifyListeners();
+  }
+
+  double getTotal({required ProductProvider productProvider}) {
+    double total = 0.0;
+    _cartItems.forEach((key, value) {
+      final getCurrentProduct =
+          productProvider.findProductById(value.productId);
+      if (getCurrentProduct == null) {
+        total += 0.0;
+      } else {
+        total += double.parse(getCurrentProduct.productPrice) * value.quantity;
+      }
+    });
+    return total;
+  }
+
+  int getTotalQuantity() {
+    int total = 0;
+    _cartItems.forEach((key, value) {total += value.quantity;});
+    return total;
   }
 }

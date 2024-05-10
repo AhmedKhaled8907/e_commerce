@@ -1,3 +1,4 @@
+import 'package:e_commerce/screens/root_screen.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,13 @@ class CustomEmptyBag extends StatelessWidget {
                 vertical: 12,
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              await Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const RootScreen(),
+                ),
+              );
+            },
             child: const Text(
               'Shop Now',
               style: TextStyle(

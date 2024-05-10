@@ -2,6 +2,7 @@ import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/screens/cart/cart_body.dart';
 import 'package:e_commerce/screens/cart/cart_bottom_checkout.dart';
+import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/custom_empty_bag.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,12 @@ class CartScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    cartProvider.clearAllCart();
+                    MyAppServices.showErrorOrWarningDialog(
+                        context: context,
+                        subtitle: 'Remove Items',
+                        onPressed: () {
+                          cartProvider.clearAllCart();
+                        });
                   },
                   icon: const Icon(Icons.delete_forever_rounded),
                 ),
