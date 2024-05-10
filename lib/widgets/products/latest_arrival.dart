@@ -57,7 +57,9 @@ class LatestArrival extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const HeartButtonWidget(),
+                        HeartButtonWidget(
+                          productId: productModel.productId,
+                        ),
                         Flexible(
                           child: InkWell(
                             borderRadius: BorderRadius.circular(8),
@@ -79,7 +81,8 @@ class LatestArrival extends StatelessWidget {
                               ),
                               child: Icon(
                                 cartProvider.isProductInCart(
-                                        productId: currentProductId!.productId)
+                                  productId: currentProductId!.productId,
+                                )
                                     ? Icons.check
                                     : Icons.add_shopping_cart_rounded,
                                 size: 20,

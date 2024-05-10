@@ -68,7 +68,9 @@ class CartBody extends StatelessWidget {
                                     },
                                     icon: const Icon(Icons.clear),
                                   ),
-                                  const HeartButtonWidget(),
+                                  HeartButtonWidget(
+                                    productId: cartModelProvider.productId,
+                                  ),
                                 ],
                               ),
                             ],

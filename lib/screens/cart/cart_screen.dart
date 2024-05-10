@@ -40,11 +40,12 @@ class CartScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     MyAppServices.showErrorOrWarningDialog(
-                        context: context,
-                        subtitle: 'Remove Items',
-                        onPressed: () {
-                          cartProvider.clearAllCart();
-                        });
+                      context: context,
+                      subtitle: 'Remove All Items',
+                      onPressed: () {
+                        cartProvider.clearAllCart();
+                      },
+                    );
                   },
                   icon: const Icon(Icons.delete_forever_rounded),
                 ),
@@ -54,16 +55,17 @@ class CartScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListView.builder(
-                      itemCount: cartProvider.getCarts.length,
-                      itemBuilder: (context, index) {
-                        return ChangeNotifierProvider.value(
-                          value: cartProvider.getCarts.values
-                              .toList()
-                              .reversed
-                              .toList()[index],
-                          child: const CartBody(),
-                        );
-                      }),
+                    itemCount: cartProvider.getCarts.length,
+                    itemBuilder: (context, index) {
+                      return ChangeNotifierProvider.value(
+                        value: cartProvider.getCarts.values
+                            .toList()
+                            .reversed
+                            .toList()[index],
+                        child: const CartBody(),
+                      );
+                    },
+                  ),
                 ),
                 // const SizedBox(height: kBottomNavigationBarHeight + 10),
                 const CartBottomCheckout(),

@@ -48,7 +48,7 @@ class MyAppServices {
                 ),
                 TextButton(
                   onPressed: () {
-                    onPressed;
+                    onPressed!();
                     Navigator.pop(context);
                   },
                   child: const SubtitleText(
@@ -67,9 +67,9 @@ class MyAppServices {
 
   static Future<void> showImagePickerDialog({
     required BuildContext context,
-    required  Function onPressedCamera,
-    required  Function onPressedGallery,
-    required  Function onPressedRemove,
+    required Function onPressedCamera,
+    required Function onPressedGallery,
+    required Function onPressedRemove,
   }) async {
     await showDialog(
       context: context,

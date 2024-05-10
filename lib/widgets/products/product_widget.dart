@@ -52,8 +52,10 @@ class ProductWidget extends StatelessWidget {
                           maxLines: 2,
                         ),
                       ),
-                      const Flexible(
-                        child: HeartButtonWidget(),
+                      Flexible(
+                        child: HeartButtonWidget(
+                          productId: currentProductId.productId,
+                        ),
                       ),
                     ],
                   ),

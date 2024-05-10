@@ -1,3 +1,4 @@
+import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
@@ -20,8 +21,10 @@ class ProductDetails extends StatelessWidget {
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final currentProductId = productProvider.findProductById(productId);
 
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: buildAppBar(cartProvider, context),
       body: SingleChildScrollView(
         child: currentProductId == null
             ? const SizedBox.shrink()
@@ -70,8 +73,9 @@ class ProductDetails extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const HeartButtonWidget(
+                          HeartButtonWidget(
                             color: Colors.lightBlue,
+                            productId: currentProductId.productId,
                           ),
                           const SizedBox(width: 24),
                           Expanded(
@@ -80,13 +84,23 @@ class ProductDetails extends StatelessWidget {
                                 backgroundColor: Colors.lightBlue.shade100,
                                 elevation: 0,
                               ),
-                              onPressed: () {},
-                              icon: const Icon(
-                                IconlyLight.bag2,
+                              onPressed: () {
+                                cartProvider.addProductToCart(
+                                  productId: productId,
+                                );
+                              },
+                              icon: Icon(
+                                cartProvider.isProductInCart(
+                                        productId: productId)
+                                    ? Icons.check
+                                    : IconlyLight.bag2,
                                 color: Colors.black,
                               ),
-                              label: const SubtitleText(
-                                label: 'Add to cart',
+                              label: SubtitleText(
+                                label: cartProvider.isProductInCart(
+                                        productId: productId)
+                                    ? 'Already in cart'
+                                    : 'Add to cart',
                                 color: Colors.black,
                               ),
                             ),
@@ -99,10 +113,11 @@ class ProductDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const TitleText(label: 'About this item'),
+                        const SizedBox(height: 16),
                         SubtitleText(label: currentProductId.productCategory),
                       ],
                     ),
-                    // const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     SubtitleText(
                       label: currentProductId.productDescription,
                     ),
@@ -114,16 +129,16 @@ class ProductDetails extends StatelessWidget {
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
+  AppBar buildAppBar(CartProvider cartProvider, BuildContext context) {
     return AppBar(
       centerTitle: true,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.only(right: 24),
+          padding: const EdgeInsets.only(right: 24),
           child: Badge(
-            label: Text('5'),
-            child: Icon(IconlyLight.bag2),
+            label: Text('${cartProvider.getCarts.length}'),
+            child: const Icon(IconlyLight.bag2),
           ),
         ),
       ],

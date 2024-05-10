@@ -26,6 +26,7 @@ class CustomEmptyBag extends StatelessWidget {
             height: height * 0.35,
             width: double.infinity,
           ),
+          const SizedBox(height: 16),
           const TitleText(
             label: 'Whoops',
             fontSize: 40,
