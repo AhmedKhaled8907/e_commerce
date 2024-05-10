@@ -61,7 +61,9 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => ChangeNotifierProvider.value(
                     value: productProvider.getProducts[index],
-                    child: const LatestArrival(),
+                    child: LatestArrival(
+                      productId: productProvider.getProducts[index].productId,
+                    ),
                   ),
                 ),
               ),
