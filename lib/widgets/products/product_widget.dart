@@ -1,5 +1,6 @@
 import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/viewed_recently.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/title_text.dart';
@@ -13,16 +14,19 @@ class ProductWidget extends StatelessWidget {
   final String productId;
   @override
   Widget build(BuildContext context) {
-    // final productModelProvider = Provider.of<ProductModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
     final currentProductId = productProvider.findProductById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewedRecentlyProvider = Provider.of<ViewedProvider>(context);
 
     Size size = MediaQuery.of(context).size;
     return currentProductId == null
         ? const SizedBox.shrink()
         : GestureDetector(
             onTap: () async {
+              viewedRecentlyProvider.viewedRecentlyProduct(
+                productId: currentProductId.productId,
+              );
               await Navigator.of(context).pushNamed(
                 ProductDetails.routeName,
                 arguments: currentProductId.productId,
@@ -40,6 +44,7 @@ class ProductWidget extends StatelessWidget {
                       height: size.height * 0.2,
                     ),
                   ),
+                  // const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,

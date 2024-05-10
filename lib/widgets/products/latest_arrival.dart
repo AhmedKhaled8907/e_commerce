@@ -1,6 +1,7 @@
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/viewed_recently.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/title_text.dart';
@@ -18,12 +19,17 @@ class LatestArrival extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final productModel = Provider.of<ProductModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
-    final currentProductId = productProvider.findProductById(productId);
+    final currentProduct = productProvider.findProductById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewedRecentlyProvider = Provider.of<ViewedProvider>(context);
 
     return GestureDetector(
       onTap: () async {
-        await Navigator.of(context).pushNamed(ProductDetails.routeName);
+        viewedRecentlyProvider.viewedRecentlyProduct(productId: productId);
+        await Navigator.of(context).pushNamed(
+          ProductDetails.routeName,
+          arguments: currentProduct.productId,
+        );
       },
       child: SizedBox(
         width: size.width * 0.5,
@@ -65,12 +71,12 @@ class LatestArrival extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                             onTap: () {
                               if (cartProvider.isProductInCart(
-                                productId: currentProductId.productId,
+                                productId: currentProduct.productId,
                               )) {
                                 return;
                               }
                               cartProvider.addProductToCart(
-                                productId: currentProductId.productId,
+                                productId: currentProduct.productId,
                               );
                             },
                             child: Container(
@@ -81,7 +87,7 @@ class LatestArrival extends StatelessWidget {
                               ),
                               child: Icon(
                                 cartProvider.isProductInCart(
-                                  productId: currentProductId!.productId,
+                                  productId: currentProduct!.productId,
                                 )
                                     ? Icons.check
                                     : Icons.add_shopping_cart_rounded,
