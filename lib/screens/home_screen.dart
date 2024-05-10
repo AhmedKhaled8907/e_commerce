@@ -1,11 +1,12 @@
-
 import 'package:card_swiper/card_swiper.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/app_constants.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/widgets/products/categories_widget.dart';
 import 'package:e_commerce/widgets/products/latest_arrival.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/assets.dart';
 import '../widgets/app_name_text.dart';
@@ -14,10 +15,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   static const routeName = '/HomeScreen';
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productProvider = Provider.of<ProductProvider>(context);
+
     return Scaffold(
       appBar: buildAppBar(context),
       body: SingleChildScrollView(
@@ -57,7 +59,10 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: 10,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => const LatestArrival(),
+                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                    value: productProvider.getProducts[index],
+                    child: const LatestArrival(),
+                  ),
                 ),
               ),
               // const SizedBox(height: 16),

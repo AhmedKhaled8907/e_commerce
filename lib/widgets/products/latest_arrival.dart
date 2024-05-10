@@ -1,9 +1,10 @@
-import 'package:e_commerce/consts/app_constants.dart';
+import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LatestArrival extends StatelessWidget {
   const LatestArrival({super.key});
@@ -11,6 +12,7 @@ class LatestArrival extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productModel = Provider.of<ProductModel>(context);
 
     return GestureDetector(
       onTap: () async {
@@ -27,7 +29,7 @@ class LatestArrival extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: FancyShimmerImage(
-                    imageUrl: AppConstants.productImage,
+                    imageUrl: productModel.productImage,
                     width: size.width * 0.3,
                     height: size.width * 0.3,
                   ),
@@ -40,7 +42,7 @@ class LatestArrival extends StatelessWidget {
                   children: [
                     Text(
                       style: const TextStyle(fontSize: 16),
-                      'label ' * 10,
+                      productModel.productTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -61,7 +63,7 @@ class LatestArrival extends StatelessWidget {
                     ),
                     FittedBox(
                       child: TitleText(
-                        label: '\$ 166',
+                        label: '\$${productModel.productPrice}',
                         color: Colors.blueAccent.shade700,
                       ),
                     ),
