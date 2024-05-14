@@ -29,12 +29,17 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   card_swiper: ^3.0.1
+  cloud_firestore: ^4.17.3
   cupertino_icons: ^1.0.6
   dynamic_height_grid_view: ^0.0.4
   fancy_shimmer_image: ^2.0.3
+  firebase_auth: ^4.19.5
+  firebase_core: ^2.31.0
+  firebase_storage: ^11.7.5
   flutter:
     sdk: flutter
   flutter_iconly: ^1.0.2
+  google_sign_in: ^6.2.1
   image_picker: ^1.1.1
   ionicons: ^0.2.2
   provider: ^6.1.2
@@ -62,8 +67,6 @@ flutter:
     - assets/images/banners/
     - assets/images/categories/
     - assets/images/profile/
-    
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -87,10 +90,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-
 flutter_assets:
   assets_path: assets/
   output_path: lib/consts/
   filename: assets.dart
-  field_prefix:
+  field_prefix: null
