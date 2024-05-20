@@ -38,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool obscureText = true;
   XFile? _pickedImage;
   final _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -72,6 +73,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       FocusScope.of(context).unfocus();
 
       try {
+        setState(() {
+          _isLoading = true;
+        });
         await _auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
@@ -79,13 +83,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }
+
+        _isLoading = false;
       } on FirebaseAuthException catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
         log(e.toString());
 
         if (e.code == 'weak-password') {
           log(e.toString());
           print('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
+          setState(() {
+            _isLoading = false;
+          });
           log(e.toString());
           Fluttertoast.showToast(
             msg: "The account already exists for that email.",
@@ -99,7 +111,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // print('The account already exists for that email.');
         }
       } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
         log(e.toString());
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
 
