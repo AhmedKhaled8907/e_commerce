@@ -4,9 +4,11 @@ import 'package:e_commerce/screens/auth/login_screen.dart';
 import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/profile/wishlist_screen.dart';
+import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
       appBar: buildAppBar(context),
@@ -136,23 +139,33 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent.shade700,
+                    backgroundColor: user == null
+                        ? Colors.blueAccent.shade700
+                        : Colors.redAccent,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 36,
                       vertical: 12,
                     ),
                   ),
-                  icon: const Icon(
-                    Icons.login,
+                  icon: Icon(
+                    user == null ? Icons.login : Icons.logout,
                     color: Colors.white,
                   ),
                   onPressed: () async {
-                    await Navigator.of(context)
-                        .pushReplacementNamed(LoginScreen.routeName);
+                    if (user == null) {
+                      await Navigator.of(context)
+                          .pushReplacementNamed(LoginScreen.routeName);
+                    } else {
+                      await MyAppServices.showErrorOrWarningDialog(
+                        context: context,
+                        subtitle: 'Are you Sure',
+                        onPressed: () {},
+                      );
+                    }
                   },
-                  label: const Text(
-                    'Login',
-                    style: TextStyle(
+                  label: Text(
+                    user == null ? 'Login' : 'Logout',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                     ),
