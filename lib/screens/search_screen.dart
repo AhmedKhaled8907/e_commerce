@@ -1,7 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/models/product_model.dart';
-import 'package:e_commerce/providers/product_provider.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/widgets/products/product_widget.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final productProvider = Provider.of<ProductProvider>(context);
     String? selectedCategory =
         ModalRoute.of(context)!.settings.arguments as String?;
-    final List<ProductModel> productsList = selectedCategory == null
+    final List<ProductModel> procutsList = selectedCategory == null
         ? productProvider.getProducts
         : productProvider.findProductByCategory(selectedCategory);
     return GestureDetector(
@@ -61,6 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 decoration: InputDecoration(
                   hintText: 'Search',
 
+                  // labelText: 'asda',
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.blueAccent.shade700,
@@ -80,7 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   setState(() {
                     searchList = productProvider.searchQuery(
                       searchText: searchController.text,
-                      selectedList: productsList,
+                      selectedList: procutsList,
                     );
                   });
                 },
@@ -88,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   setState(() {
                     searchList = productProvider.searchQuery(
                       searchText: searchController.text,
-                      selectedList: productsList,
+                      selectedList: procutsList,
                     );
                   });
                 },
@@ -106,13 +107,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: DynamicHeightGridView(
                   itemCount: searchController.text.isNotEmpty
                       ? searchList.length
-                      : productsList.length,
+                      : procutsList.length,
                   crossAxisCount: 2,
                   builder: (context, index) {
                     return ProductWidget(
                       productId: searchController.text.isNotEmpty
                           ? searchList[index].productId
-                          : productsList[index].productId,
+                          : procutsList[index].productId,
                     );
                   },
                 ),

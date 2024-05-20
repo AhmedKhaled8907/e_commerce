@@ -8,6 +8,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 class RootScreen extends StatefulWidget {
+  static const routeName = '/rootScreen';
+
   const RootScreen({super.key});
 
   @override

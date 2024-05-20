@@ -15,21 +15,21 @@ class ProductProvider extends ChangeNotifier {
     }
   }
 
-  List<ProductModel> findProductByCategory(String productCategory) {
+  List<ProductModel> findProductByCategory(String productCategoty) {
     List<ProductModel> categoryList = _products
         .where((element) => element.productCategory
             .toLowerCase()
-            .contains(productCategory.toLowerCase()))
+            .contains(productCategoty.toLowerCase()))
         .toList();
     return categoryList;
     // if (_products
-    //     .where((element) => element.productCategory == productCategory)
+    //     .where((element) => element.productCategory == productCategoty)
     //     .isEmpty) {
     //   return null;
     // }
 
     // return _products
-    //     .firstWhere((element) => element.productCategory == productCategory);
+    //     .firstWhere((element) => element.productCategory == productCategoty);
   }
 
   List<ProductModel> searchQuery({  
@@ -65,7 +65,7 @@ class ProductProvider extends ChangeNotifier {
       productPrice: "659.99",
       productCategory: "Phones",
       productDescription:
-          "5.4 Super Retina XDR display. 5G Super fast downloads, high quality streaming. Cinematic mode in 1080p at 30 fps. Dolby Vision HDR video recording up to 4K at 60 fps. 2X Optical zoom range. A15 Bionic chip. New 6-core CPU with 2 performance and 4 efficiency cores. New 4-core GPU. New 16-core Neural Engine. Up to 17 hours video playback. Face ID. Ceramic Shield front. Aerospace-grade aluminum. Water resistant to a depth of 6 meters for up to 30 minutes. Compatible with MagSafe accessories and wireless chargers.",
+          "5.4 Super Retina XDR display. 5G Superfast downloads, high quality streaming. Cinematic mode in 1080p at 30 fps. Dolby Vision HDR video recording up to 4K at 60 fps. 2X Optical zoom range. A15 Bionic chip. New 6-core CPU with 2 performance and 4 efficiency cores. New 4-core GPU. New 16-core Neural Engine. Up to 17 hours video playback. Face ID. Ceramic Shield front. Aerospace-grade aluminum. Water resistant to a depth of 6 meters for up to 30 minutes. Compatible with MagSafe accessories and wireless chargers.",
       productImage:
           "https://i.ibb.co/nbwTvXQ/2-iphone13-mini-256gb-midnight.webp",
       productQuantity: "15",
@@ -77,7 +77,7 @@ class ProductProvider extends ChangeNotifier {
       productPrice: "1199.99",
       productCategory: "Phones",
       productDescription:
-          "Les details concerning la livraison da's vortex recoin s’afficheront sur la page de validation de la commend.",
+          "Les détails concernant la livraison dans votre région s’afficheront sur la page de validation de la commande.",
       productImage: "https://i.ibb.co/G7nXCW4/3-i-Phone-14.jpg",
       productQuantity: "144",
     ),
@@ -89,7 +89,7 @@ class ProductProvider extends ChangeNotifier {
       productPrice: "1199.99",
       productCategory: "Phones",
       productDescription:
-          "\n6.8 inch Dynamic AMBLED 2X display with a 3200 x 1440 resolution\n256GB internal storage, 12GB RAM\n108MP triple camera system with 100x Space Zoom and laser autoicous\n40MP front-facing camera with dual pixel AF\n5000mAh battery with fast wireless charging and wireless power share\n5G capable for lightning fast download and streaming",
+          "\n6.8 inch Dynamic AMOLED 2X display with a 3200 x 1440 resolution\n256GB internal storage, 12GB RAM\n108MP triple camera system with 100x Space Zoom and laser autofocus\n40MP front-facing camera with dual pixel AF\n5000mAh battery with fast wireless charging and wireless power share\n5G capable for lightning fast download and streaming",
       productImage:
           "https://i.ibb.co/z5zMDCx/4-Samsung-Galaxy-S22-Ultra-5-G-256-GB-Phantom-Black-Unlocked.webp",
       productQuantity: "2363",
@@ -115,7 +115,7 @@ class ProductProvider extends ChangeNotifier {
       productPrice: "1099.99",
       productCategory: "Phones",
       productDescription:
-          "\n6.7 inch LTPO Fluid2 MAULED, 1B colors, 120Hz, HDR10+, 1300 nits (peak)\n256GB internal storage, 12GB RAM\nQuad rear camera: 48MP, 50MP, 8MP, 2MP\n16MP front-facing camera\n4500mAh battery with Warp Charge 65T (10V/6.5A) and 50W Wireless Charging\n5G capable for lightning fast download and streaming",
+          "\n6.7 inch LTPO Fluid2 AMOLED, 1B colors, 120Hz, HDR10+, 1300 nits (peak)\n256GB internal storage, 12GB RAM\nQuad rear camera: 48MP, 50MP, 8MP, 2MP\n16MP front-facing camera\n4500mAh battery with Warp Charge 65T (10V/6.5A) and 50W Wireless Charging\n5G capable for lightning fast download and streaming",
       productImage:
           "https://i.ibb.co/0yhgKVv/6-One-Plus-9-Pro-5-G-LE2120-256-GB-12-GB-RAM.png",
       productQuantity: "3636",
@@ -150,7 +150,7 @@ class ProductProvider extends ChangeNotifier {
       productPrice: "249.99",
       productCategory: "Phones",
       productDescription:
-          "\n6.67-inch 120Hz MAILED display with TrueColor\n108MP quad rear camera system with 8K video support\nQualcomm Snapdragon 732G processor\n5020mAh (typ) high-capacity battery\n33W fast charging support and 33W fast charger included in the box",
+          "\n6.67-inch 120Hz AMOLED display with TrueColor\n108MP quad rear camera system with 8K video support\nQualcomm Snapdragon 732G processor\n5020mAh (typ) high-capacity battery\n33W fast charging support and 33W fast charger included in the box",
       productImage: "https://i.ibb.co/W3QcVMv/9-Xiaomi-Redmi-Note-10-Pro.png",
       productQuantity: "353",
     ),

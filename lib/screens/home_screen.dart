@@ -1,7 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/app_constants.dart';
-import 'package:e_commerce/providers/product_provider.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/widgets/products/categories_widget.dart';
 import 'package:e_commerce/widgets/products/latest_arrival.dart';
 import 'package:e_commerce/widgets/title_text.dart';

@@ -1,6 +1,6 @@
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/providers/cart_provider.dart';
-import 'package:e_commerce/providers/product_provider.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/providers/viewed_recently.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';

@@ -1,3 +1,8 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
+import 'package:e_commerce/screens/root_screen.dart';
+import 'dart:developer';
+
 import 'package:e_commerce/consts/my_validators.dart';
 import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/auth/pick_image.dart';
@@ -32,8 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
   XFile? _pickedImage;
-  bool _isLoading = false;
-  final auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -63,50 +67,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _registerUser() async {
     final isValid = _formKey.currentState!.validate();
-
-    FocusScope.of(context).unfocus();
-
     if (isValid) {
       _formKey.currentState!.save();
-      // if (_pickedImage == null) {
-      //   MyAppServices.showErrorOrWarningDialog(
-      //     context: context,
-      //     subtitle: 'Please pick an image',
-      //     onPressed: () {},
-      //   );
-      // }
+      FocusScope.of(context).unfocus();
 
       try {
-        setState(() {
-          _isLoading = true;
-        });
-        await auth.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
+        await _auth.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
         );
-        Fluttertoast.showToast(
-          msg: "An account has been created.",
-          toastLength: Toast.LENGTH_SHORT,
-          textColor: Colors.white,
-        );
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+        }
       } on FirebaseAuthException catch (e) {
-        Fluttertoast.showToast(
-          msg: "An Error has occurred ${e.message}",
-          toastLength: Toast.LENGTH_SHORT,
-          textColor: Colors.white,
-        );
+        log(e.toString());
+
+        if (e.code == 'weak-password') {
+          log(e.toString());
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          log(e.toString());
+          Fluttertoast.showToast(
+            msg: "The account already exists for that email.",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+          // print('The account already exists for that email.');
+        }
       } catch (e) {
-        Fluttertoast.showToast(
-          msg: "An Error has occurred ${e.toString()}",
-          toastLength: Toast.LENGTH_SHORT,
-          textColor: Colors.white,
-        );
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
+        log(e.toString());
       }
     }
+
+    // if (isValid) {
+    //   if (_pickedImage == null) {
+    //     MyAppServices.showErrorOrWarningDialog(
+    //       context: context,
+    //       subtitle: 'Please pick an image',
+    //       onPressed: () {},
+    //     );
+    //   }
+    // }
   }
 
   Future<void> _localImagePicker() async {

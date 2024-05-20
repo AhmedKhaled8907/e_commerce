@@ -1,5 +1,5 @@
 import 'package:e_commerce/models/cart_model.dart';
-import 'package:e_commerce/providers/product_provider.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/screens/cart/quantity_bottom_sheet.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
@@ -18,12 +18,12 @@ class CartBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartModelProvider = Provider.of<CartModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
-    final getCurrentProduct =
+    final getCurrProduct =
         productProvider.findProductById(cartModelProvider.productId);
     final cartProvider = Provider.of<CartProvider>(context);
 
     Size size = MediaQuery.of(context).size;
-    return getCurrentProduct == null
+    return getCurrProduct == null
         ? const SizedBox.shrink()
         : FittedBox(
             child: IntrinsicWidth(
@@ -35,7 +35,7 @@ class CartBody extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: FancyShimmerImage(
-                        imageUrl: getCurrentProduct.productImage,
+                        imageUrl: getCurrProduct.productImage,
                         width: size.height * 0.2,
                         height: size.height * 0.2,
                       ),
@@ -52,7 +52,7 @@ class CartBody extends StatelessWidget {
                                 child: SizedBox(
                                   width: size.width * 0.6,
                                   child: TitleText(
-                                    label: getCurrentProduct.productTitle,
+                                    label: getCurrProduct.productTitle,
                                     maxLines: 2,
                                   ),
                                 ),
@@ -79,7 +79,7 @@ class CartBody extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SubtitleText(
-                                label: '\$${getCurrentProduct.productPrice}',
+                                label: '\$${getCurrProduct.productPrice}',
                                 fontSize: 24,
                                 color: Colors.blueAccent.shade400,
                                 fontWeight: FontWeight.w500,

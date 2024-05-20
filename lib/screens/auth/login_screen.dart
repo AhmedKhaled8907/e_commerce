@@ -1,7 +1,13 @@
+// ignore_for_file: avoid_print
+
+import 'dart:developer';
+
 import 'package:e_commerce/consts/my_validators.dart';
 import 'package:e_commerce/screens/auth/forgot_password_screen.dart';
 import 'package:e_commerce/screens/auth/register_screen.dart';
+import 'package:e_commerce/screens/root_screen.dart';
 import 'package:e_commerce/widgets/auth/google_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -49,6 +55,17 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       FocusScope.of(context).unfocus();
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+        }
+      } on FirebaseAuthException catch (e) {
+        log(e.toString());
+      }
     }
   }
 
@@ -66,7 +83,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 64),
+                      horizontal: 24,
+                      vertical: 64,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
