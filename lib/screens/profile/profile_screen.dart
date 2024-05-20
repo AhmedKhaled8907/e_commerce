@@ -14,13 +14,26 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/custom_list_tile.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    User? user = FirebaseAuth.instance.currentUser;
+    final auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+
+    Future<void> signOutUser() async {
+      await auth.signOut();
+      if (context.mounted) {
+        await Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+      }
+    }
 
     return Scaffold(
       appBar: buildAppBar(context),
@@ -159,7 +172,9 @@ class ProfileScreen extends StatelessWidget {
                       await MyAppServices.showErrorOrWarningDialog(
                         context: context,
                         subtitle: 'Are you Sure',
-                        onPressed: () {},
+                        onPressed: () async {
+                          await signOutUser();
+                        },
                       );
                     }
                   },

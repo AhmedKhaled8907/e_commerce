@@ -262,7 +262,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     BorderRadius.circular(12),
                                               ),
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed(
+                                                RootScreen.routeName,
+                                              );
+                                            },
                                             child: const TitleText(
                                               label: 'Guest?',
                                               color: Colors.white,
@@ -291,7 +296,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const TitleText(
-                                  label: 'Don\'t have an account? '),
+                                label: 'Don\'t have an account? ',
+                              ),
                               InkWell(
                                 onTap: () async {
                                   await Navigator.of(context)
