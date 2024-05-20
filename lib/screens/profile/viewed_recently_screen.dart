@@ -9,32 +9,32 @@ import 'package:provider/provider.dart';
 
 import '../../providers/viewed_recently.dart';
 
-class ViewdRecently extends StatelessWidget {
-  static const routeName = '/ViewdRecently';
+class ViewedRecently extends StatelessWidget {
+  static const routeName = '/ViewedRecently';
 
-  const ViewdRecently({super.key});
+  const ViewedRecently({super.key});
 
   @override
   Widget build(BuildContext context) {
     final viewedProvider = Provider.of<ViewedProvider>(context);
 
     return Scaffold(
-      appBar: buildAppbar(viewedProvider, context),
-      body: viewedProvider.getviewedItems.isEmpty
+      appBar: buildAppBar(viewedProvider, context),
+      body: viewedProvider.getViewedItems.isEmpty
           ? const CustomEmptyBag(
               imagePath: Assets.imagesProfileRecent,
               title: 'Your Wishlist Is Empty',
               subtitle:
-                  'Looks like you didn\'t add anything to your Wishlist .Go ahead and explore Top Categorires',
+                  'Looks like you didn\'t add anything to your Wishlist .Go ahead and explore Top Categories',
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: DynamicHeightGridView(
-                itemCount: viewedProvider.getviewedItems.length,
+                itemCount: viewedProvider.getViewedItems.length,
                 crossAxisCount: 2,
                 builder: (context, index) {
                   return ProductWidget(
-                    productId: viewedProvider.getviewedItems.values
+                    productId: viewedProvider.getViewedItems.values
                         .toList()[index]
                         .productId,
                   );
@@ -44,7 +44,7 @@ class ViewdRecently extends StatelessWidget {
     );
   }
 
-  AppBar buildAppbar(ViewedProvider viewedProvider, BuildContext context) {
+  AppBar buildAppBar(ViewedProvider viewedProvider, BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: const TitleText(
@@ -63,7 +63,7 @@ class ViewdRecently extends StatelessWidget {
             );
           },
           icon: Icon(
-            viewedProvider.getviewedItems.isEmpty
+            viewedProvider.getViewedItems.isEmpty
                 ? null
                 : Icons.delete_forever_rounded,
           ),

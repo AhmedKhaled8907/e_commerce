@@ -1,4 +1,4 @@
-import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/product_provider.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';

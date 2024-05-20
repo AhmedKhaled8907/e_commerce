@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class ViewedProvider extends ChangeNotifier {
-  final Map<String, ViewdRecentlyModel> _viewdRecentlyItems = {};
+  final Map<String, ViewedRecentlyModel> _viewedRecentlyItems = {};
 
-  Map<String, ViewdRecentlyModel> get getviewedItems {
-    return _viewdRecentlyItems;
+  Map<String, ViewedRecentlyModel> get getViewedItems {
+    return _viewedRecentlyItems;
   }
 
   void viewedRecentlyProduct({required String productId}) {
-    _viewdRecentlyItems.putIfAbsent(
+    _viewedRecentlyItems.putIfAbsent(
       productId,
-      () => ViewdRecentlyModel(
-        viewdRecentlyId: const Uuid().v4(),
+      () => ViewedRecentlyModel(
+        viewedRecentlyId: const Uuid().v4(),
         productId: productId,
       ),
     );
@@ -21,7 +21,7 @@ class ViewedProvider extends ChangeNotifier {
   }
 
   void clearAllViewed() {
-    _viewdRecentlyItems.clear();
+    _viewedRecentlyItems.clear();
     notifyListeners();
   }
 }

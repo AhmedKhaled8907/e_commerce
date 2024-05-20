@@ -1,5 +1,5 @@
 import 'package:e_commerce/providers/cart_provider.dart';
-import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/product_provider.dart';
 import 'package:e_commerce/widgets/app_name_text.dart';
 import 'package:e_commerce/widgets/products/heart_button_widget.dart';
 import 'package:e_commerce/widgets/subtitle_text.dart';

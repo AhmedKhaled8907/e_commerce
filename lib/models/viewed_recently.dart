@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ViewdRecentlyModel with ChangeNotifier {
-  final String viewdRecentlyId, productId;
+class ViewedRecentlyModel with ChangeNotifier {
+  final String viewedRecentlyId, productId;
 
-  ViewdRecentlyModel({
-    required this.viewdRecentlyId,
+  ViewedRecentlyModel({
+    required this.viewedRecentlyId,
     required this.productId,
   });
 }

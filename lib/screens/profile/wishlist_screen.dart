@@ -1,6 +1,6 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:e_commerce/consts/assets.dart';
-import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/product_provider.dart';
 import 'package:e_commerce/providers/wishlist_provider.dart';
 import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/custom_empty_bag.dart';
@@ -22,13 +22,13 @@ class WishlistScreen extends StatelessWidget {
     final wishlistItems = wishlistProvider.getWishlists;
     Provider.of<ProductProvider>(context);
     return Scaffold(
-      appBar: buildAppbar(wishlistProvider, context),
+      appBar: buildAppBar(wishlistProvider, context),
       body: wishlistItems.isEmpty
           ? const CustomEmptyBag(
               imagePath: Assets.imagesBagBagWish,
               title: 'Your Wishlist Is Empty',
               subtitle:
-                  'Looks like you didn\'t add anything to your Wishlist .Go ahead and explore Top Categorires',
+                  'Looks like you didn\'t add anything to your Wishlist .Go ahead and explore Top Categories',
             )
           : DynamicHeightGridView(
               itemCount: wishlistItems.length,
@@ -45,7 +45,7 @@ class WishlistScreen extends StatelessWidget {
     );
   }
 
-  AppBar buildAppbar(WishlistProvider wishlistProvider, BuildContext context) {
+  AppBar buildAppBar(WishlistProvider wishlistProvider, BuildContext context) {
     final wishlistItems = wishlistProvider.getWishlists;
     return AppBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

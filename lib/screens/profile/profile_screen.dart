@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                 title: 'Viewed Recently',
                 onTap: () async {
                   await Navigator.of(context)
-                      .pushNamed(ViewdRecently.routeName);
+                      .pushNamed(ViewedRecently.routeName);
                 },
               ),
               CustomListTile(
