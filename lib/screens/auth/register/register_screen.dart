@@ -13,9 +13,9 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../widgets/app_name_text.dart';
-import '../../widgets/subtitle_text.dart';
-import '../../widgets/title_text.dart';
+import '../../../widgets/app_name_text.dart';
+import '../../../widgets/subtitle_text.dart';
+import '../../../widgets/title_text.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/RegisterScreen';

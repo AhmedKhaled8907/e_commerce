@@ -1,6 +1,6 @@
 import 'package:e_commerce/consts/assets.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
-import 'package:e_commerce/screens/auth/login_screen.dart';
+import 'package:e_commerce/screens/auth/login/screens/login_screen.dart';
 import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/profile/viewed_recently_screen.dart';
 import 'package:e_commerce/screens/profile/wishlist_screen.dart';
