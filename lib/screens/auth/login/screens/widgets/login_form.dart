@@ -51,6 +51,9 @@ class _LogInFormState extends State<LogInForm> {
       _formKey.currentState!.save();
       FocusScope.of(context).unfocus();
       try {
+        setState(() {
+          isLoading = true;
+        });
         await _auth.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
@@ -58,7 +61,11 @@ class _LogInFormState extends State<LogInForm> {
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }
+        isLoading = false;
       } on FirebaseAuthException catch (e) {
+        setState(() {
+          isLoading = false;
+        });
         if (e.code == 'weak-password') {
           log(e.toString());
           print('The password provided is too weak.');
@@ -111,7 +118,7 @@ class _LogInFormState extends State<LogInForm> {
           const SizedBox(height: 48),
           CustomSignButton(
             onPressed: () async {
-              _loginUser();
+              await _loginUser();
             },
           ),
         ],

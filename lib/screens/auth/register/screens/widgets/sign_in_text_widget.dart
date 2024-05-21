@@ -1,4 +1,3 @@
-import 'package:e_commerce/screens/auth/login/screens/login_screen.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +20,8 @@ class SignInTextWidget extends StatelessWidget {
                 label: 'Have an account already? ',
               ),
               InkWell(
-                onTap: () async {
-                  await Navigator.of(context).pushNamedAndRemoveUntil(
-                    LoginScreen.routeName,
-                    (route) => false,
-                  );
+                onTap: () {
+                  Navigator.pop(context);
                 },
                 child: const TitleText(
                   label: 'Sign In',
