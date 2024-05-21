@@ -2,63 +2,88 @@
 
 import 'dart:developer';
 
-import 'package:e_commerce/screens/auth/login/screens/widgets/login_email_text_form.dart';
-import 'package:e_commerce/screens/auth/login/screens/widgets/forgot_password_text.dart';
+import 'package:e_commerce/screens/auth/register/screens/widgets/register_email_text_form.dart';
 import 'package:e_commerce/screens/root_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'login_password_text_form.dart';
-import 'custom_sign_button.dart';
+import 'register_name_text_form.dart';
+import 'register_password_text_form.dart';
+import 'register_repeat_password_text_form.dart';
+import 'sign_up_button.dart';
 
-class LogInForm extends StatefulWidget {
-  const LogInForm({super.key});
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
 
   @override
-  State<LogInForm> createState() => _LogInFormState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _LogInFormState extends State<LogInForm> {
-  final _formKey = GlobalKey<FormState>();
+class _RegisterFormState extends State<RegisterForm> {
+  late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late TextEditingController repeatPasswordController;
+  late FocusNode _nameFocusNode;
   late FocusNode _emailFocusNode;
   late FocusNode _passwordFocusNode;
+  late FocusNode _repeatPasswordFocusNode;
+  late final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   bool isLoading = false;
 
   @override
   void initState() {
+    nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    repeatPasswordController = TextEditingController();
+    _nameFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
+    _repeatPasswordFocusNode = FocusNode();
     super.initState();
   }
 
   @override
   void dispose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    repeatPasswordController.dispose();
+    _nameFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
+    _repeatPasswordFocusNode.dispose();
     super.dispose();
   }
 
-  Future<void> _loginUser() async {
-    if (_formKey.currentState!.validate()) {
+  Future<void> _registerUser() async {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
       _formKey.currentState!.save();
       FocusScope.of(context).unfocus();
+
       try {
-        await _auth.signInWithEmailAndPassword(
+        setState(() {
+          isLoading = true;
+        });
+        await _auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }
+
+        isLoading = false;
       } on FirebaseAuthException catch (e) {
+        setState(() {
+          isLoading = false;
+        });
+        log(e.toString());
+
         if (e.code == 'weak-password') {
           log(e.toString());
           print('The password provided is too weak.');
@@ -83,8 +108,22 @@ class _LogInFormState extends State<LogInForm> {
           isLoading = false;
         });
         log(e.toString());
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
       }
     }
+
+    // if (isValid) {
+    //   if (_pickedImage == null) {
+    //     MyAppServices.showErrorOrWarningDialog(
+    //       context: context,
+    //       subtitle: 'Please pick an image',
+    //       onPressed: () {},
+    //     );
+    //   }
+    // }
   }
 
   @override
@@ -93,25 +132,36 @@ class _LogInFormState extends State<LogInForm> {
       key: _formKey,
       child: Column(
         children: [
-          LogInEmailTextForm(
+          RegisterNameTextForm(
+            nameController: nameController,
+            nameFocusNode: _nameFocusNode,
+            emailFocusNode: _emailFocusNode,
+          ),
+          const SizedBox(height: 16),
+          RegisterEmailTextForm(
             emailController: emailController,
             emailFocusNode: _emailFocusNode,
             passwordFocusNode: _passwordFocusNode,
           ),
           const SizedBox(height: 16),
-          LogInPasswordTextForm(
+          RegisterPasswordTextForm(
             passwordController: passwordController,
             passwordFocusNode: _passwordFocusNode,
-            onFieldSubmitted: (value) async {
-              await _loginUser();
+            repeatPasswordFocusNode: _repeatPasswordFocusNode,
+          ),
+          const SizedBox(height: 16),
+          RegisterRepeatPasswordTextForm(
+            repeatPasswordController: repeatPasswordController,
+            repeatPasswordFocusNode: _repeatPasswordFocusNode,
+            passwordController: passwordController,
+            onFieldSubmitted: (p0) async {
+              // await _registerUser();
             },
           ),
-          const SizedBox(height: 24),
-          const ForgotPasswordText(),
-          const SizedBox(height: 48),
-          CustomSignButton(
+          const SizedBox(height: 32),
+          SignUpButton(
             onPressed: () async {
-              _loginUser();
+              await _registerUser();
             },
           ),
         ],

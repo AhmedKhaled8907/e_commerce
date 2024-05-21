@@ -6,7 +6,7 @@ import 'package:e_commerce/providers/viewed_recently.dart';
 import 'package:e_commerce/providers/wishlist_provider.dart';
 import 'package:e_commerce/screens/auth/forgot_password/screens/forgot_password_screen.dart';
 import 'package:e_commerce/screens/auth/login/screens/login_screen.dart';
-import 'package:e_commerce/screens/auth/register/register_screen.dart';
+import 'package:e_commerce/screens/auth/register/screens/register_screen.dart';
 import 'package:e_commerce/screens/home_screen.dart';
 import 'package:e_commerce/screens/inner_screen/order/orders_screen.dart';
 import 'package:e_commerce/screens/inner_screen/product_details.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../consts/my_validators.dart';
 
-class EmailLogInForm extends StatelessWidget {
-  const EmailLogInForm({
+class LogInEmailTextForm extends StatelessWidget {
+  const LogInEmailTextForm({
     super.key,
     required this.emailController,
     required this.emailFocusNode,
@@ -34,4 +34,3 @@ class EmailLogInForm extends StatelessWidget {
     );
   }
 }
-

@@ -2,8 +2,8 @@ import 'package:e_commerce/consts/my_validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class PasswordLogInForm extends StatefulWidget {
-  const PasswordLogInForm({
+class LogInPasswordTextForm extends StatefulWidget {
+  const LogInPasswordTextForm({
     super.key,
     required this.passwordController,
     required this.passwordFocusNode,
@@ -15,10 +15,10 @@ class PasswordLogInForm extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
 
   @override
-  State<PasswordLogInForm> createState() => _PasswordLogInFormState();
+  State<LogInPasswordTextForm> createState() => _LogInPasswordTextFormState();
 }
 
-class _PasswordLogInFormState extends State<PasswordLogInForm> {
+class _LogInPasswordTextFormState extends State<LogInPasswordTextForm> {
   bool obscureText = true;
 
   @override

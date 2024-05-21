@@ -1,9 +1,9 @@
-import 'package:e_commerce/screens/auth/register/register_screen.dart';
+import 'package:e_commerce/screens/auth/register/screens/register_screen.dart';
 import 'package:e_commerce/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomSignUpText extends StatelessWidget {
-  const CustomSignUpText({
+class SignUpTextWidget extends StatelessWidget {
+  const SignUpTextWidget({
     super.key,
   });
 
