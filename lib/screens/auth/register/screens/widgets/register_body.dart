@@ -21,12 +21,12 @@ class _RegisterBodyState extends State<RegisterBody> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: LoadingManager(
-            isLoading: isLoading,
-            child: const Padding(
+    return LoadingManager(
+      isLoading: isLoading,
+      child: const CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
@@ -44,12 +44,12 @@ class _RegisterBodyState extends State<RegisterBody> {
               ),
             ),
           ),
-        ),
-        const SliverFillRemaining(
-          hasScrollBody: false,
-          child: SignInTextWidget(),
-        ),
-      ],
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: SignInTextWidget(),
+          ),
+        ],
+      ),
     );
   }
 }

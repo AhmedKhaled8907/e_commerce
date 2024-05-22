@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/screens/auth/register/screens/widgets/register_email_text_form.dart';
 import 'package:e_commerce/screens/root_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,7 +31,7 @@ class _RegisterFormState extends State<RegisterForm> {
   late FocusNode _passwordFocusNode;
   late FocusNode _repeatPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
   bool isLoading = false;
 
   @override
@@ -69,10 +70,21 @@ class _RegisterFormState extends State<RegisterForm> {
         setState(() {
           isLoading = true;
         });
-        await _auth.createUserWithEmailAndPassword(
+        await auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
+        User? user = auth.currentUser;
+        final uid = user!.uid;
+        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+          'userId': uid,
+          'userName': nameController.text,
+          'userEmail': emailController.text.toLowerCase(),
+          'userImage': '',
+          'createdAt': Timestamp.now(),
+          'userCart': [],
+          'userWish': [],
+        });
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }
@@ -155,7 +167,7 @@ class _RegisterFormState extends State<RegisterForm> {
             repeatPasswordFocusNode: _repeatPasswordFocusNode,
             passwordController: passwordController,
             onFieldSubmitted: (p0) async {
-              // await _registerUser();
+              await _registerUser();
             },
           ),
           const SizedBox(height: 32),
