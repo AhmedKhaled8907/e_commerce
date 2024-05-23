@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/screens/root_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleButton extends StatelessWidget {
   const GoogleButton({super.key});
 
-  Future<void> signInWithGoogle(context) async {
+  Future<void> signInWithGoogle(BuildContext context) async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -28,7 +29,21 @@ class GoogleButton extends StatelessWidget {
     );
 
     // Once signed in, return the UserCredential
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    final userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (userCredential.additionalUserInfo!.isNewUser) {
+      final user = userCredential.user!;
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'userId': user.uid,
+        'userName': user.displayName,
+        'userEmail': user.email,
+        'userImage': user.photoURL,
+        'createdAt': Timestamp.now(),
+        'userCart': [],
+        'userWish': [],
+      });
+    }
 
     if (context.mounted) {
       await Navigator.of(context).pushReplacementNamed(RootScreen.routeName);

@@ -39,10 +39,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       userModel = await userProvider.getUserData();
-    } on FirebaseAuthException catch (e) {
-      throw e.message.toString();
-    } catch (e) {
-      throw e.toString();
+    } catch (error) {
+      if (mounted) {
+        await MyAppServices.showErrorOrWarningDialog(
+          onPressed: () {},
+          context: context,
+          subtitle: "An error has been occurred $error",
+        );
+      }
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -84,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 // const SizedBox(height: 20),
-                user == null
+                userModel == null
                     ? const SizedBox.shrink()
                     : Row(
                         children: [
@@ -95,12 +103,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               shape: BoxShape.circle,
                               color: Theme.of(context).cardColor,
                               border: Border.all(
-                                color: Theme.of(context).colorScheme.background,
+                                color: Colors.grey.shade700,
                                 width: 3,
                               ),
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  Assets.imagesProfilePicture,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  userModel!.userImage,
                                 ),
                                 fit: BoxFit.fill,
                               ),
@@ -109,10 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TitleText(
-                                label: userModel!.userName,
-                              ),
+                              TitleText(label: userModel!.userName),
                               SubtitleText(label: userModel!.userEmail),
                             ],
                           ),

@@ -1,4 +1,3 @@
-import 'package:e_commerce/screens/inner_screen/loading_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../widgets/app_name_text.dart';
@@ -15,7 +14,7 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  bool isLoading = false;
+  bool isLoading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,39 +22,38 @@ class _LoginBodyState extends State<LoginBody> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: LoadingManager(
-        isLoading: isLoading,
-        child: const CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 64,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: AppNameText(fontSize: 32),
+      child: isLoading
+          ? const Center(child: CircularProgressIndicator(),)
+          : const CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 64,
                     ),
-                    WelcomeText(),
-                    SizedBox(height: 48),
-                    LogInForm(),
-                    SizedBox(height: 32),
-                    ConnectionSection(),
-                  ],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: AppNameText(fontSize: 32),
+                        ),
+                        WelcomeText(),
+                        SizedBox(height: 48),
+                        LogInForm(),
+                        SizedBox(height: 32),
+                        ConnectionSection(),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: SignUpTextWidget(),
+                ),
+              ],
             ),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: SignUpTextWidget(),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
