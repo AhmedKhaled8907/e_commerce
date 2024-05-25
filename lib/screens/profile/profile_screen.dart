@@ -24,15 +24,20 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   User? user = FirebaseAuth.instance.currentUser;
-  bool isLoading = false;
+  bool _isLoading = true;
+
   UserModel? userModel;
 
   Future<void> fetchUserData() async {
     if (user == null) {
       setState(() {
-        isLoading = false;
+        _isLoading = false;
       });
       return;
     }
@@ -49,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     } finally {
       setState(() {
-        isLoading = false;
+        _isLoading = false;
       });
     }
   }
@@ -69,12 +74,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       appBar: buildAppBar(context),
       body: LoadingManager(
-        isLoading: isLoading,
+        isLoading: _isLoading,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
