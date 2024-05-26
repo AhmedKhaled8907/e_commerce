@@ -1,14 +1,20 @@
 // ignore_for_file: avoid_print
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce/providers/register_provider.dart';
 import 'package:e_commerce/screens/auth/register/screens/widgets/register_email_text_form.dart';
 import 'package:e_commerce/screens/root_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../services/my_app_services.dart';
 import 'register_name_text_form.dart';
 import 'register_password_text_form.dart';
 import 'register_repeat_password_text_form.dart';
@@ -32,6 +38,7 @@ class _RegisterFormState extends State<RegisterForm> {
   late FocusNode _repeatPasswordFocusNode;
   late final _formKey = GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
+  Reference storageRef = FirebaseStorage.instance.ref();
   bool isLoading = false;
 
   @override
@@ -61,8 +68,11 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   Future<void> _registerUser() async {
+    XFile? pickedImage =
+        Provider.of<RegisterProvider>(context, listen: false).getPickedImage;
     final isValid = _formKey.currentState!.validate();
-    if (isValid) {
+
+    if (isValid && pickedImage != null) {
       _formKey.currentState!.save();
       FocusScope.of(context).unfocus();
 
@@ -70,26 +80,35 @@ class _RegisterFormState extends State<RegisterForm> {
         setState(() {
           isLoading = true;
         });
+
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('usersImages')
+            .child('${emailController.text.trim()}.jpg');
+        await storageRef.putFile(File(pickedImage.path));
+        final userImageUrl = await storageRef.getDownloadURL();
+
         await auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
+
         User? user = auth.currentUser;
         final uid = user!.uid;
+
         await FirebaseFirestore.instance.collection('users').doc(uid).set({
           'userId': uid,
           'userName': nameController.text,
           'userEmail': emailController.text.toLowerCase(),
-          'userImage': '',
+          'userImage': userImageUrl,
           'createdAt': Timestamp.now(),
           'userCart': [],
           'userWish': [],
         });
+
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }
-
-        isLoading = false;
       } on FirebaseAuthException catch (e) {
         setState(() {
           isLoading = false;
@@ -97,13 +116,8 @@ class _RegisterFormState extends State<RegisterForm> {
         log(e.toString());
 
         if (e.code == 'weak-password') {
-          log(e.toString());
-          print('The password provided is too weak.');
+          log('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
-          setState(() {
-            isLoading = false;
-          });
-          log(e.toString());
           Fluttertoast.showToast(
             msg: "The account already exists for that email.",
             toastLength: Toast.LENGTH_SHORT,
@@ -113,7 +127,6 @@ class _RegisterFormState extends State<RegisterForm> {
             textColor: Colors.white,
             fontSize: 16.0,
           );
-          // print('The account already exists for that email.');
         }
       } catch (e) {
         setState(() {
@@ -125,17 +138,13 @@ class _RegisterFormState extends State<RegisterForm> {
           isLoading = false;
         });
       }
+    } else {
+      MyAppServices.showErrorOrWarningDialog(
+        context: context,
+        subtitle: 'Please pick an image',
+        onPressed: () {},
+      );
     }
-
-    // if (isValid) {
-    //   if (_pickedImage == null) {
-    //     MyAppServices.showErrorOrWarningDialog(
-    //       context: context,
-    //       subtitle: 'Please pick an image',
-    //       onPressed: () {},
-    //     );
-    //   }
-    // }
   }
 
   @override

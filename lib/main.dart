@@ -1,6 +1,7 @@
 import 'package:e_commerce/consts/theme_data.dart';
 import 'package:e_commerce/providers/cart_provider.dart';
 import 'package:e_commerce/providers/prodcut_provider.dart';
+import 'package:e_commerce/providers/register_provider.dart';
 import 'package:e_commerce/providers/theme_provider.dart';
 import 'package:e_commerce/providers/user_provider.dart';
 import 'package:e_commerce/providers/viewed_recently.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {

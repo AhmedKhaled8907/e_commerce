@@ -1,7 +1,9 @@
+import 'package:e_commerce/providers/register_provider.dart';
 import 'package:e_commerce/services/my_app_services.dart';
 import 'package:e_commerce/widgets/auth/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class RegisterImage extends StatefulWidget {
   const RegisterImage({super.key});
@@ -11,26 +13,27 @@ class RegisterImage extends StatefulWidget {
 }
 
 class _RegisterImageState extends State<RegisterImage> {
-  XFile? pickedImage;
-
-  Future<void> _localImagePicker() async {
+  Future<XFile?> localImagePicker() async {
     final ImagePicker picker = ImagePicker();
     await MyAppServices.showImagePickerDialog(
       context: context,
       onPressedCamera: () async {
-        pickedImage = await picker.pickImage(source: ImageSource.camera);
-        setState(() {});
+        XFile? pickedImage = await picker.pickImage(source: ImageSource.camera);
+        Provider.of<RegisterProvider>(context, listen: false)
+            .setPickedImage(pickedImage);
       },
       onPressedGallery: () async {
-        pickedImage = await picker.pickImage(source: ImageSource.gallery);
-        setState(() {});
+        XFile? pickedImage =
+            await picker.pickImage(source: ImageSource.gallery);
+        Provider.of<RegisterProvider>(context, listen: false)
+            .setPickedImage(pickedImage);
       },
       onPressedRemove: () {
-        setState(() {
-          pickedImage = null;
-        });
+        Provider.of<RegisterProvider>(context, listen: false)
+            .setPickedImage(null);
       },
     );
+    return null;
   }
 
   @override
@@ -41,12 +44,14 @@ class _RegisterImageState extends State<RegisterImage> {
       child: SizedBox(
         height: size.width * 0.3,
         width: size.width * 0.3,
-        child: PickImage(
-          pickedImage: pickedImage,
-          onTap: () async {
-            await _localImagePicker();
-          },
-        ),
+        child: Consumer<RegisterProvider>(builder: (context, provider, child) {
+          return PickImage(
+            pickedImage: provider.getPickedImage,
+            onTap: () async {
+              await localImagePicker();
+            },
+          );
+        }),
       ),
     );
   }

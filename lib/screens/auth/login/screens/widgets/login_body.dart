@@ -14,7 +14,7 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  bool isLoading = true;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,9 @@ class _LoginBodyState extends State<LoginBody> {
         FocusScope.of(context).unfocus();
       },
       child: isLoading
-          ? const Center(child: CircularProgressIndicator(),)
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : const CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
