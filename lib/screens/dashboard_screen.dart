@@ -7,15 +7,10 @@ import '../providers/theme_provider.dart';
 import '../services/assets_manager.dart';
 import '../widgets/dashboard_btn.dart';
 
-class DashboardScreen extends StatefulWidget {
+class DashboardScreen extends StatelessWidget {
   static const routeName = '/DashboardScreen';
   const DashboardScreen({super.key});
 
-  @override
-  State<DashboardScreen> createState() => DashboardScreenState();
-}
-
-class DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);

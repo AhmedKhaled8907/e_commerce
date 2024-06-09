@@ -17,9 +17,9 @@ class ProductProvider with ChangeNotifier {
 
   List<ProductModel> findByCategory({required String ctgName}) {
     List<ProductModel> ctgList = _products
-        .where((element) => element.productCategory
-            .toLowerCase()
-            .contains(ctgName.toLowerCase()))
+        .where((element) => element.productCategory.toLowerCase().contains(
+              ctgName.toLowerCase(),
+            ))
         .toList();
     return ctgList;
   }
@@ -27,9 +27,9 @@ class ProductProvider with ChangeNotifier {
   List<ProductModel> searchQuery(
       {required String searchText, required List<ProductModel> passedList}) {
     List<ProductModel> searchList = passedList
-        .where((element) => element.productTitle
-            .toLowerCase()
-            .contains(searchText.toLowerCase()))
+        .where((element) => element.productTitle.toLowerCase().contains(
+              searchText.toLowerCase(),
+            ))
         .toList();
     return searchList;
   }
@@ -38,36 +38,36 @@ class ProductProvider with ChangeNotifier {
     // Phones
     ProductModel(
       //1
-      productId: 'iphone14-128gb-black',
-      productTitle: "Apple iPhone 14 Pro (128GB) - Black",
+      productId: 'iPhone  14-128gb-black',
+      productTitle: "Apple iPhone  14 Pro (128GB) - Black",
       productPrice: "1399.99",
       productCategory: "Phones",
       productDescription:
-          "6.1-inch Super Retina XDR display with ProMotion and always-on display. Dynamic Island, a new and magical way to interact with your iPhone. 48MP main camera for up to 4x higher resolution. Cinematic mode, now in 4K Dolby Vision up to 30 fps. Action mode, for stable and smooth videos when you're on the move. Accident detection, vital safety technology that calls for help for you. All-day battery life and up to 23 hours of video playback.",
-      productImage: "https://i.ibb.co/BtMBSgK/1-iphone14-128gb-black.webp",
+          "6.1-inch Super Retina XDR display with ProMotion and always-on display. Dynamic Island, a new and magical way to interact with your iPhone . 48MP main camera for up to 4x higher resolution. Cinematic mode, now in 4K Dolby Vision up to 30 fps. Action mode, for stable and smooth videos when you're on the move. Accident detection, vital safety technology that calls for help for you. All-day battery life and up to 23 hours of video playback.",
+      productImage: "https://i.ibb.co/BtMBSgK/1-iPhone 14-128gb-black.webp",
       productQuantity: "10",
     ),
     ProductModel(
       //2
-      productId: 'iphone13-mini-256gb-midnight',
+      productId: 'iPhone 13-mini-256gb-midnight',
       productTitle:
-          "iPhone 13 Mini, 256GB, Midnight - Unlocked (Renewed Premium)",
+          "iPhone  13 Mini, 256GB, Midnight - Unlocked (Renewed Premium)",
       productPrice: "659.99",
       productCategory: "Phones",
       productDescription:
-          "5.4 Super Retina XDR display. 5G Superfast downloads, high quality streaming. Cinematic mode in 1080p at 30 fps. Dolby Vision HDR video recording up to 4K at 60 fps. 2X Optical zoom range. A15 Bionic chip. New 6-core CPU with 2 performance and 4 efficiency cores. New 4-core GPU. New 16-core Neural Engine. Up to 17 hours video playback. Face ID. Ceramic Shield front. Aerospace-grade aluminum. Water resistant to a depth of 6 meters for up to 30 minutes. Compatible with MagSafe accessories and wireless chargers.",
+          "5.4 Super Retina XDR display. 5G Super fast downloads, high quality streaming. Cinematic mode in 1080p at 30 fps. Dolby Vision HDR video recording up to 4K at 60 fps. 2X Optical zoom range. A15 Bionic chip. New 6-core CPU with 2 performance and 4 efficiency cores. New 4-core GPU. New 16-core Neural Engine. Up to 17 hours video playback. Face ID. Ceramic Shield front. Aerospace-grade aluminum. Water resistant to a depth of 6 meters for up to 30 minutes. Compatible with MagSafe accessories and wireless chargers.",
       productImage:
-          "https://i.ibb.co/nbwTvXQ/2-iphone13-mini-256gb-midnight.webp",
+          "https://i.ibb.co/nbwTvXQ/2-iPhone 13-mini-256gb-midnight.webp",
       productQuantity: "15",
     ),
     ProductModel(
       //3
-      productId: 'Acheter un iPhone 14',
-      productTitle: "iPhone 14",
+      productId: 'Acheter un iPhone  14',
+      productTitle: "iPhone  14",
       productPrice: "1199.99",
       productCategory: "Phones",
       productDescription:
-          "Les détails concernant la livraison dans votre région s’afficheront sur la page de validation de la commande.",
+          "Les details concernant la livraison dans votre région s’afficheront sur la page de validation de la commande.",
       productImage: "https://i.ibb.co/G7nXCW4/3-i-Phone-14.jpg",
       productQuantity: "144",
     ),
@@ -125,12 +125,12 @@ class ProductProvider with ChangeNotifier {
     ProductModel(
       //8
       productId: const Uuid().v4(),
-      productTitle: "Apple introduces iPhone 14 and iPhone 14 Plus",
+      productTitle: "Apple introduces iPhone  14 and iPhone  14 Plus",
       productPrice: "1199.99",
       productCategory: "Phones",
       productDescription:
-          "A new, larger 6.7-inch size joins the popular 6.1-inch design, featuring a new dual-camera system, Crash Detection, a smartphone industry-first safety service with Emergency SOS via satellite, and the best battery life on iPhone",
-      productImage: "https://i.ibb.co/8P1HBm4/8-iphone14plushereo.jpg",
+          "A new, larger 6.7-inch size joins the popular 6.1-inch design, featuring a new dual-camera system, Crash Detection, a smartphone industry-first safety service with Emergency SOS via satellite, and the best battery life on iPhone ",
+      productImage: "https://i.ibb.co/8P1HBm4/8-iPhone 14plushereo.jpg",
       productQuantity: "2526",
     ),
     ProductModel(

@@ -1,5 +1,7 @@
 import 'package:e_commerce_admin/screens/dashboard_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'consts/theme_data.dart';
 import 'providers/product_provider.dart';
@@ -8,8 +10,13 @@ import 'screens/edit_upload_product_form.dart';
 import 'screens/inner_screens/orders/orders_screen.dart';
 import 'screens/search_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
 
 class MyApp extends StatelessWidget {

@@ -17,6 +17,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late TextEditingController searchTextController;
+  List<ProductModel> productListSearch = [];
 
   @override
   void initState() {
@@ -30,7 +31,6 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  List<ProductModel> productListSearch = [];
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -98,9 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         });
                       },
                     ),
-                    const SizedBox(
-                      height: 15.0,
-                    ),
+                    const SizedBox(height: 15.0),
                     if (searchTextController.text.isNotEmpty &&
                         productListSearch.isEmpty) ...[
                       const Center(
