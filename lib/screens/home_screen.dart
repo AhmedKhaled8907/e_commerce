@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final productProvider = Provider.of<ProductProvider>(context);
+    final productLength = productProvider.getProducts.length;
 
     return Scaffold(
       appBar: buildAppBar(context),
@@ -49,22 +50,32 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              const TitleText(
-                label: 'Latest Arrivals',
-                fontSize: 24,
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: size.height * 0.175,
-                child: ListView.builder(
-                  itemCount: 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
-                    value: productProvider.getProducts[index],
-                    child: LatestArrival(
-                      productId: productProvider.getProducts[index].productId,
+              Visibility(
+                visible: productProvider.getProducts.isNotEmpty,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TitleText(
+                      label: 'Latest Arrivals',
+                      fontSize: 24,
                     ),
-                  ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: size.height * 0.175,
+                      child: ListView.builder(
+                        itemCount: productLength < 10 ? productLength : 10,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) =>
+                            ChangeNotifierProvider.value(
+                          value: productProvider.getProducts[index],
+                          child: LatestArrival(
+                            productId:
+                                productProvider.getProducts[index].productId,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               // const SizedBox(height: 16),

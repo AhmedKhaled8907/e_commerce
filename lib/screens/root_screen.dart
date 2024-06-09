@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:e_commerce/providers/cart_provider.dart';
+import 'package:e_commerce/providers/prodcut_provider.dart';
 import 'package:e_commerce/screens/cart/cart_screen.dart';
 import 'package:e_commerce/screens/home_screen.dart';
 import 'package:e_commerce/screens/profile/profile_screen.dart';
@@ -19,6 +22,7 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   late PageController controller;
   int currentScreen = 0;
+  bool isLoadingProd = true;
   List<Widget> screens = [
     const HomeScreen(),
     const SearchScreen(),
@@ -34,6 +38,30 @@ class _RootScreenState extends State<RootScreen> {
     controller = PageController(
       initialPage: currentScreen,
     );
+  }
+
+  Future<void> fetchLatestProducts() async {
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    try {
+      Future.wait({
+        productProvider.fetchProducts(),
+      });
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      setState(() {
+        isLoadingProd = false;
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (isLoadingProd) {
+      fetchLatestProducts();
+    }
+    super.didChangeDependencies();
   }
 
   @override

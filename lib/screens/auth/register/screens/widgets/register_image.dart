@@ -19,14 +19,18 @@ class _RegisterImageState extends State<RegisterImage> {
       context: context,
       onPressedCamera: () async {
         XFile? pickedImage = await picker.pickImage(source: ImageSource.camera);
-        Provider.of<RegisterProvider>(context, listen: false)
-            .setPickedImage(pickedImage);
+        if (mounted) {
+          Provider.of<RegisterProvider>(context, listen: false)
+              .setPickedImage(pickedImage);
+        }
       },
       onPressedGallery: () async {
         XFile? pickedImage =
             await picker.pickImage(source: ImageSource.gallery);
-        Provider.of<RegisterProvider>(context, listen: false)
-            .setPickedImage(pickedImage);
+        if (mounted) {
+          Provider.of<RegisterProvider>(context, listen: false)
+              .setPickedImage(pickedImage);
+        }
       },
       onPressedRemove: () {
         Provider.of<RegisterProvider>(context, listen: false)
