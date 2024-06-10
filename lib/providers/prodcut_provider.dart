@@ -3,8 +3,8 @@ import 'package:e_commerce/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductProvider extends ChangeNotifier {
+  final productDb = FirebaseFirestore.instance.collection('products');
   final List<ProductModel> _products = [];
-
   List<ProductModel> get getProducts {
     return _products;
   }
@@ -47,11 +47,12 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<List<ProductModel>> fetchProducts() async {
-    final fireStore = FirebaseFirestore.instance;
-    final productDb = fireStore.collection('products');
-
     try {
-      await productDb.get().then((productsSnapshot) {
+      await productDb
+          .orderBy('createdAt', descending: false)
+          .get()
+          .then((productsSnapshot) {
+        _products.clear();
         for (var element in productsSnapshot.docs) {
           _products.insert(
             0,
@@ -61,6 +62,23 @@ class ProductProvider extends ChangeNotifier {
       });
       notifyListeners();
       return _products;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Stream<List<ProductModel>> fetchProductsAsStream() {
+    try {
+      return productDb.snapshots().map((snapshot) {
+        _products.clear();
+        for (var element in snapshot.docs) {
+          _products.insert(
+            0,
+            ProductModel.fromFirestore(element),
+          );
+        }
+        return _products;
+      });
     } catch (e) {
       rethrow;
     }
