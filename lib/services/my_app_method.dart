@@ -83,37 +83,49 @@ class MyAppMethods {
                 child: ListBody(
               children: [
                 TextButton.icon(
+                  style:
+                      TextButton.styleFrom(foregroundColor: Colors.blueAccent),
                   onPressed: () {
                     cameraFCT();
                     if (Navigator.canPop(context)) {
                       Navigator.pop(context);
                     }
                   },
-                  icon: const Icon(Icons.camera),
+                  icon: const Icon(
+                    Icons.camera,
+                  ),
                   label: const Text(
                     "Camera",
                   ),
                 ),
                 TextButton.icon(
+                  style:
+                      TextButton.styleFrom(foregroundColor: Colors.blueAccent),
                   onPressed: () {
                     galleryFCT();
                     if (Navigator.canPop(context)) {
                       Navigator.pop(context);
                     }
                   },
-                  icon: const Icon(Icons.image),
+                  icon: const Icon(
+                    Icons.image,
+                  ),
                   label: const Text(
                     "Gallery",
                   ),
                 ),
                 TextButton.icon(
+                  style:
+                      TextButton.styleFrom(foregroundColor: Colors.blueAccent),
                   onPressed: () {
                     removeFCT();
                     if (Navigator.canPop(context)) {
                       Navigator.pop(context);
                     }
                   },
-                  icon: const Icon(Icons.remove),
+                  icon: const Icon(
+                    Icons.remove,
+                  ),
                   label: const Text(
                     "Remove",
                   ),
