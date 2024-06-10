@@ -41,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final List<ProductModel> productList = passedCategory == null
         ? productProvider.getProducts
         : productProvider.findByCategory(ctgName: passedCategory);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -53,17 +54,31 @@ class _SearchScreenState extends State<SearchScreen> {
           //   child: Image.asset(AssetsManager.shoppingCart),
           // ),
         ),
-        body: productList.isEmpty
-            ? const Center(
-                child: TitlesTextWidget(label: "No product found"),
-              )
-            : Padding(
+        body: StreamBuilder<List<ProductModel>>(
+            stream: productProvider.fetchProductsAsStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: TitlesTextWidget(
+                    label: snapshot.error.toString(),
+                  ),
+                );
+              } else if (snapshot.data == null) {
+                return const Center(
+                  child: TitlesTextWidget(
+                    label: "No product has been added",
+                  ),
+                );
+              }
+              return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 15.0,
-                    ),
+                    const SizedBox(height: 15.0),
                     TextField(
                       controller: searchTextController,
                       decoration: InputDecoration(
@@ -92,9 +107,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       onSubmitted: (value) {
                         setState(() {
                           productListSearch = productProvider.searchQuery(
-                            searchText: searchTextController.text,
-                            passedList: productList,
-                          );
+                              searchText: searchTextController.text,
+                              passedList: productList);
                         });
                       },
                     ),
@@ -125,7 +139,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ],
                 ),
-              ),
+              );
+            }),
       ),
     );
   }
